@@ -1,0 +1,27 @@
+{
+  "name": "ts_online_bookstore_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtsonkova/TS_Online_Bookstore_Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mtsonkova/TS_Online_Bookstore_Backend/issues"
+  },
+  "homepage": "https://github.com/mtsonkova/TS_Online_Bookstore_Backend#readme",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.8.3"
+  }
+}
