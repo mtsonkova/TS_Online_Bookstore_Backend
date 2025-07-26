@@ -1,1 +1,20 @@
 //todo
+
+// package com.itbulls.learnit.javacore.exam.solution.enteties;
+
+// import java.io.Serializable;
+// import java.util.List;
+
+// public interface Order extends Serializable {
+
+// 	boolean isCreditCardNumberValid(String userInput);
+
+// 	void setCreditCardNumber(String userInput);
+
+// 	void setProducts(List<Product> products);
+
+// 	void setCustomerId(int customerId);
+	
+// 	int getCustomerId();
+
+// }
