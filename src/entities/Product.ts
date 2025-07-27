@@ -3,16 +3,17 @@
 // package com.itbulls.learnit.javacore.exam.solution.enteties;
 
 // import java.io.Serializable;
+// expect issues wit this class because you do not have Serializable interface in TS
+//export interface Product extends Serializable {
 
-// public interface Product extends Serializable {
-
-// 	int getId();
-
-// 	String getProductName();
+export interface Product {
+    getId(): number;
 	
-// 	String getCategoryName();
+    getProductName(): string;
 	
-// 	double getPrice();
+	getCategoryName(): string;
+	
+	getPrice(): number;
 
-// 	void setPrice(double price);
-// }
+	setPrice(price: number): void;
+}
