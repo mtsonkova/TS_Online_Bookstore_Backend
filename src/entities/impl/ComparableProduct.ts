@@ -1,4 +1,4 @@
-import { Product } from "@src/entities/Product";
+import { Product } from "@src/entities/entitiesInterfaces/Product";
 // exect issues here because we do not have default Comparable interface in TS
 // public class ComparableProduct implements Product, Comparable<Product> {
 
