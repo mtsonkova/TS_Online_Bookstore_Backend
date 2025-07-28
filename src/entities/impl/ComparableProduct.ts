@@ -42,6 +42,9 @@ export class ComparableProduct implements Product {
 	}
 	
 	public setPrice(price: number): void {
+		if (price < 0) {
+			throw new Error("Price cannot be negative");
+		}
 		this.price = price;
 	}
 	
