@@ -9,9 +9,7 @@ export class ComparableProduct implements Product {
 	private categoryName: string;
 	private price: number;
     
-    constructor();
-    constructor(id: number, productName: string, categoryName: string, price: number);
-    constructor(id?: number, productName?: string, categoryName?: string, price?: number) {
+  constructor(id?: number, productName?: string, categoryName?: string, price?: number) {
   this.id = id ?? 0;
   this.productName = productName ?? "";
   this.categoryName = categoryName ?? "";
