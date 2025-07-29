@@ -1,17 +1,13 @@
-//todo
-
-// package com.itbulls.learnit.javacore.exam.solution.enteties;
-
-// public interface User {
+interface User {
 	
-// 	String getFirstName();
-// 	String getLastName();
-// 	String getPassword();
-// 	String getEmail();
-// 	int getId();
+	getFirstName(): string;
+	getLastName(): string;
+	getPassword(): string;
+	getEmail(): string;
+	getId(): Number;
 	
-// 	void setPassword(String newPassword);
-// 	void setEmail(String newEmail);
+	setPassword(newPassword: string): void;
+	setEmail(newEmail: string): void;
 	
 	
-// }
+}

@@ -9,6 +9,5 @@ export interface Cart {
 	getProducts(): Product[];
 
 	clear(): void;
-
 }
 

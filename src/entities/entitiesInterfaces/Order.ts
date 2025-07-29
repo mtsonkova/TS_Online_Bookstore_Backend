@@ -3,18 +3,18 @@
 // package com.itbulls.learnit.javacore.exam.solution.enteties;
 
 // import java.io.Serializable;
-// import java.util.List;
-
 // public interface Order extends Serializable {
+import { Product } from "@src/entities/entitiesInterfaces/Product";
+interface Order {
 
-// 	boolean isCreditCardNumberValid(String userInput);
+	isCreditCardNumberValid(userInput: string): boolean;
 
-// 	void setCreditCardNumber(String userInput);
+	setCreditCardNumber(userInput: string): void;
 
-// 	void setProducts(List<Product> products);
-
-// 	void setCustomerId(int customerId);
+	setProducts(products: Product[]): void;
+ 
+    setCustomerId(customerId: Number): void;
 	
-// 	int getCustomerId();
+	getCustomerId(): Number;
 
-// }
+}
