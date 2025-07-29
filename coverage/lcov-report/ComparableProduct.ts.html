@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.44% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -132,10 +132,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,11 +146,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,18 +154,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -187,10 +187,10 @@ export class ComparableProduct implements Product {
     constructor();
     constructor(id: number, productName: string, categoryName: string, price: number);
     constructor(id?: number, productName?: string, categoryName?: string, price?: number) {
-  this.id = id ?? <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
-  this.productName = productName ?? <span class="branch-1 cbranch-no" title="branch not covered" >"";</span>
-  this.categoryName = categoryName ?? <span class="branch-1 cbranch-no" title="branch not covered" >"";</span>
-  this.price = price ?? <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
+  this.id = id ?? 0;
+  this.productName = productName ?? "";
+  this.categoryName = categoryName ?? "";
+  this.price = price ?? 0;
 }
 &nbsp;
 &nbsp;
@@ -204,27 +204,27 @@ export class ComparableProduct implements Product {
 		return this.id;
 	}
 &nbsp;
-	public <span class="fstat-no" title="function not covered" >getProductName(</span>): string {
-<span class="cstat-no" title="statement not covered" >		return this.productName;</span>
+	public getProductName(): string {
+		return this.productName;
 	}
 	
 	public getCategoryName(): string {
 		return this.categoryName;
 	}
 &nbsp;
-	public <span class="fstat-no" title="function not covered" >getPrice(</span>): number {
-<span class="cstat-no" title="statement not covered" >		return this.price;</span>
+	public getPrice(): number {
+		return this.price;
 	}
 	
-	public <span class="fstat-no" title="function not covered" >setPrice(</span>price: number): void {
-<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (price &lt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >			throw new Error("Price cannot be negative");</span>
+	public setPrice(price: number): void {
+		if (price &lt; 0) {
+			throw new Error("Price cannot be negative");
 		}
-<span class="cstat-no" title="statement not covered" >		this.price = price;</span>
+		this.price = price;
 	}
 	
-	public <span class="fstat-no" title="function not covered" >compareTo(</span>otherProduct: Product): number {
-<span class="cstat-no" title="statement not covered" >		return this.id - otherProduct.getId();</span>
+	public compareTo(otherProduct: Product): number {
+		return this.id - otherProduct.getId();
 	}
 &nbsp;
 }
@@ -235,7 +235,7 @@ export class ComparableProduct implements Product {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-28T16:39:45.473Z
+                at 2025-07-29T17:43:09.386Z
             </div>
         <script src="prettify.js"></script>
         <script>

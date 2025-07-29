@@ -1,6 +1,8 @@
 import {ComparableProduct} from '@src/entities/impl/ComparableProduct';
 
 let comparableProduct = new ComparableProduct(1, 'Lenovo Laptop', 'computers', 3620.59);
+let secondComparableProduct = new ComparableProduct();
+
 
 describe('Test Comparable Product methods', ()=> {
     test('Should validate toString method', () => {
@@ -12,7 +14,30 @@ describe('Test Comparable Product methods', ()=> {
         expect(comparableProduct.getId()).toEqual(1);
     });
 
+    test('Should vaidate getProductName method', () => {
+        expect(comparableProduct.getProductName()).toBe('Lenovo Laptop');
+    })
+
     test('Should validate getCategoryName method', () => {
         expect(comparableProduct.getCategoryName()).toBe('computers');
     });
+
+    test('Should validate getPrice method', () => {
+        expect(comparableProduct.getPrice()).toEqual(3620.59);
+    });
+
+    test('Should vaidate setPrice with positive price', () => {
+        comparableProduct.setPrice(2500);
+        let currentPrice = comparableProduct.getPrice();
+        expect(currentPrice).toEqual(2500);
+    });
+
+    test('Should validate setPrice with negative price', () => {
+        expect(() => comparableProduct.setPrice(-5000)).toThrow('Price cannot be negative');
+    });
+
+    test('Should validate compare product', ()=> {
+        let idDifference = secondComparableProduct.compareTo(comparableProduct);
+        expect(idDifference).toEqual(-1);
+    })
 })
