@@ -1,9 +1,3 @@
-//todo
-
-
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Cart;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
-
 import { Cart } from '@src/entities/entitiesInterfaces/Cart';
 import { Product } from '@src/entities/entitiesInterfaces/Product';
 

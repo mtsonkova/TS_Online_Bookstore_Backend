@@ -5,7 +5,8 @@
 // import java.io.Serializable;
 // public interface Order extends Serializable {
 import { Product } from "@src/entities/entitiesInterfaces/Product";
-interface Order {
+
+export interface Order {
 
 	isCreditCardNumberValid(userInput: string): boolean;
 
@@ -13,8 +14,8 @@ interface Order {
 
 	setProducts(products: Product[]): void;
  
-    setCustomerId(customerId: Number): void;
+    setCustomerId(customerId: number): void;
 	
-	getCustomerId(): Number;
+	getCustomerId(): number;
 
 }

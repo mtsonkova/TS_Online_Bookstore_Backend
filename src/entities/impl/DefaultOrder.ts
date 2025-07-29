@@ -1,61 +1,43 @@
-//Todo
+import {Order} from '@src/entities/entitiesInterfaces/Order';
+import {Product} from '@src/entities/entitiesInterfaces/Product';
 
-// package com.itbulls.learnit.javacore.exam.solution.enteties.impl;
+export class DefaultOrder implements Order {
 
-// import java.util.ArrayList;
-// import java.util.List;
+	private readonly AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
+	private creditCardNumber!: string
+	private products!: Product[];
+	private customerId!: number;
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Order;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
+	public isCreditCardNumberValid(creditCardNumber: string): boolean {
+    return creditCardNumber.length === this.AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER &&
+           !creditCardNumber.includes(" ") &&
+           Number(creditCardNumber) > 0;
+}
 
-
-// public class DefaultOrder implements Order {
-
-// 	private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
-	
-// 	private String creditCardNumber;
-// 	private List<Product> products;
-// 	private int customerId;
-
-// 	@Override
-// 	public boolean isCreditCardNumberValid(String creditCardNumber) {
-// 		return creditCardNumber.toCharArray().length == AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER && 
-// 				!creditCardNumber.contains(" ") && Long.parseLong(creditCardNumber) > 0;
-// 	}
-
-// 	@Override
-// 	public void setCreditCardNumber(String creditCardNumber) {
-// 		if (creditCardNumber == null) {
-// 			return;
-// 		}
-// 		this.creditCardNumber = creditCardNumber;
-// 	}
-
-// 	@Override
-// 	public void setProducts(List<Product> products) {
-// 		this.products = new ArrayList<>(products);
-// 	}
-
-// 	@Override
-// 	public void setCustomerId(int customerId) {
-// 		this.customerId = customerId;
-// 	}
-
-
-// 	@Override
-// 	public int getCustomerId() {
-// 		return this.customerId;
-// 	}
-	
-// 	@Override
-// 	public String toString() {
-// 		return "Order: customer id - " + this.customerId + "\t" +
-// 					"credit card number - " + this.creditCardNumber + "\t" + 
-// 					"products - " + this.products;
-// 	}
+	public setCreditCardNumber(creditCardNumber: string):void {
+		if (creditCardNumber == null) {
+			return;
+		}
+		this.creditCardNumber = creditCardNumber;
+	}
 
 	
-	
-	
+	public setProducts( products: Product[]): void {
+		this.products = [...products];
+	}
 
-// }
+	public setCustomerId(customerId: number): void {
+		this.customerId = customerId;
+	}
+
+
+	public getCustomerId(): number {
+		return this.customerId;
+	}
+	
+	public toString(): string {
+		return "Order: customer id - " + this.customerId + "\t" +
+					"credit card number - " + this.creditCardNumber + "\t" + 
+					"products - " + this.products;
+	}
+}

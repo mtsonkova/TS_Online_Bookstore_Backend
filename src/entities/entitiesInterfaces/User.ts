@@ -1,10 +1,10 @@
-interface User {
+export interface User {
 	
 	getFirstName(): string;
 	getLastName(): string;
 	getPassword(): string;
 	getEmail(): string;
-	getId(): Number;
+	getId(): number;
 	
 	setPassword(newPassword: string): void;
 	setEmail(newEmail: string): void;
