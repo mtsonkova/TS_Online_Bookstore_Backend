@@ -1,44 +1,31 @@
-//todo
+import { Cart } from '@src/entities/entitiesInterfaces/Cart';
+import { Product } from '@src/entities/entitiesInterfaces/Product';
 
-// package com.itbulls.learnit.javacore.exam.solution.enteties.impl;
+export class DefaultCart implements Cart {
 
-// import java.util.ArrayList;
-// import java.util.Collections;
-// import java.util.List;
-
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Cart;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
-
-// public class DefaultCart implements Cart {
-
-// 	private List<Product> products;
+	private products: Product[];
 	
-// 	{
-// 		products = new ArrayList<>();
-// 	}
+	constructor(){
+		this.products = [];
+	}
 	
-// 	@Override
-// 	public boolean isEmpty() {
-// 		return products.isEmpty();
-// 	}
+	public isEmpty(): boolean {
+		return (this.products.length === 0);
+	}
 
-// 	@Override
-// 	public void addProduct(Product product) {
-// 		if (product == null) {
-// 			return;
-// 		}
-// 		products.add(product);
-// 	}
+	public addProduct(product: Product): void {
+		if (product == null) {
+			return;
+		}
+		this.products.push(product);
+	}
 
-// 	@Override
-// 	public List<Product> getProducts() {
-// //		return Collections.unmodifiableList(this.products); // returns unmodifiable List
-// 		return this.products;
-// 	}
+	public getProducts():Product[] {
+    	return this.products;
+	}
 
-// 	@Override
-// 	public void clear() {
-// 		products.clear();
-// 	}
+	public clear(): void {
+		this.products = [];
+	}
 
-// }
+}

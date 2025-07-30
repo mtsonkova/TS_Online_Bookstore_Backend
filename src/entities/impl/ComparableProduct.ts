@@ -1,61 +1,53 @@
-//ToDo
-
-
-// package com.itbulls.learnit.javacore.exam.solution.enteties.impl;
-
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
-
+import { Product } from "@src/entities/entitiesInterfaces/Product";
+// exect issues here because we do not have default Comparable interface in TS
 // public class ComparableProduct implements Product, Comparable<Product> {
+
+export class ComparableProduct implements Product {
 	
-// 	private int id;
-// 	private String productName;
-// 	private String categoryName;
-// 	private double price;
+	private id: number;
+	private productName: string;
+	private categoryName: string;
+	private price: number;
+    
+  constructor(id?: number, productName?: string, categoryName?: string, price?: number) {
+  this.id = id ?? 0;
+  this.productName = productName ?? "";
+  this.categoryName = categoryName ?? "";
+  this.price = price ?? 0;
+}
 
-// 	public ComparableProduct() {
-// 	}
+
 	
-// 	public ComparableProduct(int id, String productName, String categoryName, double price) {
-// 		this.id = id;
-// 		this.productName = productName;
-// 		this.categoryName = categoryName;
-// 		this.price = price;
-// 	}
+	public toString(): string {
+		return "Product id=" + this.id + ", product name=" + this.productName
+				+ ", category name=" + this.categoryName + ", price=" + this.price;
+	}
 
-// 	@Override
-// 	public String toString() {
-// 		return "Product id=" + id + ", product name=" + productName
-// 				+ ", category name=" + categoryName + ", price=" + price;
-// 	}
+	public getId(): number {
+		return this.id;
+	}
 
-// 	@Override
-// 	public int getId() {
-// 		return this.id;
-// 	}
-
-// 	@Override
-// 	public String getProductName() {
-// 		return this.productName;
-// 	}
+	public getProductName(): string {
+		return this.productName;
+	}
 	
-// 	@Override
-// 	public String getCategoryName() {
-// 		return this.categoryName;
-// 	}
+	public getCategoryName(): string {
+		return this.categoryName;
+	}
 
-// 	@Override
-// 	public double getPrice() {
-// 		return this.price;
-// 	}
+	public getPrice(): number {
+		return this.price;
+	}
 	
-// 	@Override
-// 	public void setPrice(double price) {
-// 		this.price = price;
-// 	}
+	public setPrice(price: number): void {
+		if (price < 0) {
+			throw new Error("Price cannot be negative");
+		}
+		this.price = price;
+	}
 	
-// 	@Override
-// 	public int compareTo(Product otherProduct) {
-// 		return this.id - otherProduct.getId();
-// 	}
+	public compareTo(otherProduct: Product): number {
+		return this.id - otherProduct.getId();
+	}
 
-// }
+}

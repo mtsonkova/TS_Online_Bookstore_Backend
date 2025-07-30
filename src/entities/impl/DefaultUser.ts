@@ -1,104 +1,78 @@
-//todo
+import { validate } from '@src/annotations/validate';
+import {User} from '@src/entities/entitiesInterfaces/User';
 
-// package com.itbulls.learnit.javacore.exam.solution.enteties.impl;
+export class DefaultUser implements User {
+	
+	private static userCounter: number = 0;
+	
+	private id: number;
+	
+	@validate('[a-zA-Z]+')
+	private firstName: string;
+	
+	@validate('[a-zA-Z]+')
+	private lastName: string;
+	
+	private password: string;
+	
+	@validate('.+@.+')
+	private email: string;
 
-// import com.itbulls.learnit.javacore.exam.solution.annotations.Validate;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
+	constructor(id?: number, firstName?: string, lastName?: string, password?: string, email?: string) {
+		this.id = id ?? ++DefaultUser.userCounter;
+        DefaultUser.userCounter--; // to keep sequantial id
+        this.firstName = firstName ?? '';
+		this.lastName = lastName ?? '';
+		this.password = password ?? '';
+		this.email = email ?? '';
+	}
 
-// public class DefaultUser implements User {
-	
-// 	private static int userCounter = 0;
-	
-// 	private int id;
-	
-// 	@Validate(pattern = "[a-zA-Z]+")
-// 	private String firstName;
-	
-// 	@Validate(pattern = "[a-zA-Z]+")
-// 	private String lastName;
-	
-// 	private String password;
-	
-// 	@Validate(pattern = ".+@.+")
-// 	private String email;
+	public getFirstName(): string {
+		return this.firstName;
+	}
 
-// 	{
-// 		id = ++userCounter;
-// 	}
+	public getLastName(): string {
+		return this.lastName;
+	}
+
+	public getPassword(): string {
+		return this.password;
+	}
+
+	public getEmail(): string {
+		return this.email;
+	}
 	
-// 	public DefaultUser() {
-// 	}
+	public toString(): string {
+		return "ID: " + this.getId() + "\t\t" +
+				"First Name: " + this.getFirstName() + "\t\t" +
+				"Last Name: " + this.getLastName() + "\t\t" +
+				"Email: " + this.getEmail();
+	}
+
+	public setPassword(password: string): void {
+		if (password == null) {
+			return;
+		}
+		this.password = password;
+	}
+
+	public setEmail(newEmail: string): void {
+		if (newEmail == null) {
+			return;
+		}
+		this.email = newEmail;
+	}
+
+	public getId(): number {
+		return this.id;
+	}
 	
-// 	public DefaultUser(String firstName, String lastName, String password, String email) {
-// 		this.firstName = firstName;
-// 		this.lastName = lastName;
-// 		this.password = password;
-// 		this.email = email;
-// 	}
+	clearState(): void {
+		DefaultUser.userCounter = 0;
+	}
 	
-// 	public DefaultUser(int id, String firstName, String lastName, String password, String email) {
-// 		this.id = id;
-// 		userCounter--; // to keep sequantial id
-// 		this.firstName = firstName;
-// 		this.lastName = lastName;
-// 		this.password = password;
-// 		this.email = email;
-// 	}
-
-// 	@Override
-// 	public String getFirstName() {
-// 		return this.firstName;
-// 	}
-
-// 	@Override
-// 	public String getLastName() {
-// 		return this.lastName;
-// 	}
-
-// 	@Override
-// 	public String getPassword() {
-// 		return this.password;
-// 	}
-
-// 	@Override
-// 	public String getEmail() {
-// 		return this.email;
-// 	}
-	
-// 	@Override
-// 	public String toString() {
-// 		return "ID: " + this.getId() + "\t\t" +
-// 				"First Name: " + this.getFirstName() + "\t\t" +
-// 				"Last Name: " + this.getLastName() + "\t\t" +
-// 				"Email: " + this.getEmail();
-// 	}
-
-// 	@Override
-// 	public void setPassword(String password) {
-// 		if (password == null) {
-// 			return;
-// 		}
-// 		this.password = password;
-// 	}
-
-// 	@Override
-// 	public void setEmail(String newEmail) {
-// 		if (newEmail == null) {
-// 			return;
-// 		}
-// 		this.email = newEmail;
-// 	}
-
-// 	@Override
-// 	public int getId() {
-// 		return this.id;
-// 	}
-	
-// 	void clearState() {
-// 		userCounter = 0;
-// 	}
-	
-// 	public static void setCounter(int updatedCount) {
-// 		userCounter = updatedCount;
-// 	}
-// }
+	public static setCounter(updatedCount: number): void {
+		DefaultUser.userCounter = updatedCount;
+	}
+}
