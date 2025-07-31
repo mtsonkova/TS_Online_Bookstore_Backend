@@ -1,12 +1,8 @@
-//todo
+export interface Menu {
+	start(): void;
+	printMenuHeader(): void;
+}
 
-// package com.itbulls.learnit.javacore.exam.solution.menu;
-
-// public interface Menu {
-	
-// 	String RESOURCE_BUNDLE_BASE_NAME = "exam.labels";
-
-// 	void start();
-	
-// 	void printMenuHeader();
-// }
+export const ExamConstants = {
+    RESOURCE_BUNDLE_BASE_NAME: "exam.labels"
+} as const;
