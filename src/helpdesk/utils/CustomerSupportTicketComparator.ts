@@ -1,25 +1,26 @@
-//todo
+import { SupportTicket } from "@src/helpdesk/entities/SupportTicket";
 
-// package com.itbulls.learnit.javacore.exam.solution.helpdesk.utils;
+export class CustomSupportTicketsComparator {
 
-// import java.util.Comparator;
+  compare(ticket1: SupportTicket | null, ticket2: SupportTicket | null): number {
+    // Handle null tickets or null priorities gracefully
+    if (
+      ticket1 === null || 
+      ticket2 === null || 
+      ticket1.getPriority() == null || 
+      ticket2.getPriority() == null
+    ) {
+      return 0;
+    }
 
-// import com.itbulls.learnit.javacore.exam.solution.helpdesk.enteties.SupportTicket;
+    // Compare priority descending (assuming priority is an enum or number)
+    const priorityDiff = ticket2.getPriority() - ticket1.getPriority();
 
-// public class CustomSupportTicketsComparator implements Comparator<SupportTicket> {
+    if (priorityDiff !== 0) {
+      return priorityDiff;
+    }
 
-// 	@Override
-// 	public int compare(SupportTicket ticket1, SupportTicket ticket2) {
-// 		if (ticket1 == null || ticket2 == null || ticket1.getPriority() == null ||  
-// 				ticket2.getPriority() == null) {
-// 			return 0;
-// 		}
-		
-// 		int result = ticket2.getPriority().compareTo(ticket1.getPriority());
-// 		if (result == 0) {
-// 			result = ticket1.getSequentialNumber() - ticket2.getSequentialNumber();
-// 		}
-// 		return result;
-// 	}
-
-// }
+    // If priorities equal, compare sequentialNumber ascending
+    return ticket1.getSequentialNumber() - ticket2.getSequentialNumber();
+  }
+}

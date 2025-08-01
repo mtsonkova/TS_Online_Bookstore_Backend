@@ -1,46 +1,26 @@
-//todo
+import { Priority } from '@src/helpdesk/entities/Priority';
+import { RequestType } from '@src/helpdesk/entities/RequestType';
+import { RequestTypePriority } from '@src/helpdesk/entities/RequestType';
+import { SupportTicket } from '@src/helpdesk/entities/SupportTicket';
 
-// package com.itbulls.learnit.javacore.exam.solution.helpdesk.enteties.impl;
+export class DefaultSupportTicket implements SupportTicket {
+  private static counter = 0;
 
-// import com.itbulls.learnit.javacore.exam.solution.helpdesk.enteties.Priority;
-// import com.itbulls.learnit.javacore.exam.solution.helpdesk.enteties.RequestType;
-// import com.itbulls.learnit.javacore.exam.solution.helpdesk.enteties.SupportTicket;
+  private readonly sequentialNumber: number;
 
-// public class DefaultSupportTicket implements SupportTicket {
-	
-// 	private static int counter;
-	
-// 	private RequestType requestType;
-// 	private int sequentialNumber;
-	
-// 	{
-// 		sequentialNumber = ++counter;
-// 	}
-	
-// 	public DefaultSupportTicket() {
-// 		// Default empty constructor
-// 	}
-	
-// 	public DefaultSupportTicket(RequestType requestType) {
-// 		this.requestType = requestType;
-// 	}
+  constructor(private readonly requestType: RequestType) {
+    this.sequentialNumber = ++DefaultSupportTicket.counter;
+  }
 
-// 	@Override
-// 	public Priority getPriority() {
-// 		if (requestType == null) {
-// 			return null;
-// 		}
-// 		return this.requestType.getPriority();
-// 	}
+  public getPriority(): Priority {
+    return RequestTypePriority[this.requestType];
+  }
 
-// 	@Override
-// 	public int getSequentialNumber() {
-// 		return this.sequentialNumber;
-// 	}
+  public getSequentialNumber(): number {
+    return this.sequentialNumber;
+  }
 
-// 	@Override
-// 	public RequestType getRequestType() {
-// 		return this.requestType;
-// 	}
-
-// }
+  public getRequestType(): RequestType {
+    return this.requestType;
+  }
+}

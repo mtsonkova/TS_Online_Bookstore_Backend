@@ -1,17 +1,13 @@
-//todo
+import { SupportTicket } from '@src/helpdesk/entities/SupportTicket';
 
-// package com.itbulls.learnit.javacore.exam.solution.helpdesk.facades;
-
-// import com.itbulls.learnit.javacore.exam.solution.helpdesk.enteties.SupportTicket;
-
-// public interface HelpDeskFacade {
+export interface HelpDeskFacade {
 	
-// 	void addNewSupportTicket(SupportTicket supportTicket);
+	addNewSupportTicket(supportTicket: SupportTicket): void;
 	
-// 	SupportTicket getNextSupportTicket();
+	getNextSupportTicket(): SupportTicket | undefined;
 
-// 	/**
-// 	 * @return amount of tickets that are not processed
-// 	 */
-// 	int getNumberOfTickets();
-// }
+	/**
+	 * @return amount of tickets that are not processed
+	 */
+	getNumberOfTickets(): number;
+}

@@ -1,21 +1,20 @@
-//todo
+import { Priority } from '@src/helpdesk/entities/Priority';
+import { RequestType } from '@src/helpdesk/entities/RequestType';
 
-// package com.itbulls.learnit.javacore.exam.solution.helpdesk.enteties;
+export interface SupportTicket {
 
-// public interface SupportTicket {
+	getPriority(): Priority;
 
-// 	Priority getPriority();
+	/**
+	 * This method returns the unique sequential number of the support ticket.
+	 * This number can be used as an identifier. 
+	 * Order is started from 1.
+	 * The less the return number is - that support ticket was created earlier.
+	 * 
+	 * @return unique sequence number
+	 */
+	getSequentialNumber(): number;
 
-// 	/**
-// 	 * This method returns the unique sequential number of the support ticket.
-// 	 * This number can be used as an identifier. 
-// 	 * Order is started from 1.
-// 	 * The less the return number is - that support ticket was created earlier.
-// 	 * 
-// 	 * @return unique sequence number
-// 	 */
-// 	int getSequentialNumber();
+	getRequestType(): RequestType;
 
-// 	RequestType getRequestType();
-
-// }
+}
