@@ -1,35 +1,27 @@
-//todo
+import { SupportTicket } from "@src/helpdesk/entities/SupportTicket";
+import { HelpDeskFacade } from "@src/helpdesk/facades/HelpDeskFacade";
+import { CustomSupportTicketsComparator } from "@src/helpdesk/utils/CustomerSupportTicketComparator";
 
-// package com.itbulls.learnit.javacore.exam.solution.helpdesk.facades.impl;
+export class DefaultHelpDeskFacade implements HelpDeskFacade {
+  private tickets: SupportTicket[];
 
-// import java.util.PriorityQueue;
-// import java.util.Queue;
+  private comparator: CustomSupportTicketsComparator;
 
-// import com.itbulls.learnit.javacore.exam.solution.helpdesk.enteties.SupportTicket;
-// import com.itbulls.learnit.javacore.exam.solution.helpdesk.facades.HelpDeskFacade;
-// import com.itbulls.learnit.javacore.exam.solution.helpdesk.utils.CustomSupportTicketsComparator;
+  constructor() {
+    this.tickets = [];
+    this.comparator = new CustomSupportTicketsComparator();
+  }
 
-// public class DefaultHelpDeskFacade implements HelpDeskFacade {
-	
-// 	private Queue<SupportTicket> tickets;
-	
-// 	{
-// 		tickets = new PriorityQueue<>(new CustomSupportTicketsComparator());
-// 	}
+  public addNewSupportTicket(supportTicket: SupportTicket): void {
+    this.tickets.push(supportTicket);
+    this.tickets.sort(this.comparator.compare.bind(this.comparator));
+  }
 
-// 	@Override
-// 	public void addNewSupportTicket(SupportTicket supportTicket) {
-// 		tickets.offer(supportTicket);
-// 	}
+  public getNextSupportTicket(): SupportTicket | undefined {
+    return this.tickets.shift();
+  }
 
-// 	@Override
-// 	public SupportTicket getNextSupportTicket() {
-// 		return tickets.poll();
-// 	}
-
-// 	@Override
-// 	public int getNumberOfTickets() {
-// 		return tickets.size();
-// 	}
-
-// }
+  public getNumberOfTickets(): number {
+    return this.tickets.length;
+  }
+}
