@@ -1,77 +1,63 @@
-//todo
+import { Product } from "@src/entities/entitiesInterfaces/Product";
+import { DefaultProduct } from "@src/entities/impl/DefaultProduct";
+import { ProductManagementService } from "@src/services/ProductManagementService";
+import { ProductStoringService } from "@src/storage/ProductStoringService";
+import { DefaultProductStoringService } from "@src/storage/impl/DefaultProductStoringService";
 
-// package com.itbulls.learnit.javacore.exam.solution.services.impl;
+export class DefaultProductManagementService implements ProductManagementService {
+  private static instance: DefaultProductManagementService;
+  private static products: Product[] = [];
+  private static productStoringService: ProductStoringService = new DefaultProductStoringService();
 
-// import java.util.ArrayList;
-// import java.util.Arrays;
-// import java.util.List;
+  // Simulate static block
+  private static initialized: boolean = DefaultProductManagementService.initialize();
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.impl.DefaultProduct;
-// import com.itbulls.learnit.javacore.exam.solution.services.ProductManagementService;
-// import com.itbulls.learnit.javacore.exam.solution.storage.ProductStoringService;
-// import com.itbulls.learnit.javacore.exam.solution.storage.impl.DefaultProductStoringService;
+  private static initialize(): boolean {
+    DefaultProductManagementService.loadProductsFromStorage();
+    return true;
+  }
 
+  public static loadProductsFromStorage(): void {
+    this.products = this.productStoringService.loadProducts();
+  }
 
-// public class DefaultProductManagementService implements ProductManagementService {
-	
-// 	private static DefaultProductManagementService instance;
-	
-// 	private static List<Product> products;
-	
-// 	private static ProductStoringService productStoringService;
+  /**
+   * @deprecated use loadProductsFromStorage instead
+   */
+  private static initProducts(): void {
+    this.products = [
+      new DefaultProduct(1, "Hardwood Oak Suffolk Internal Door", "Doors", 109.99),
+      new DefaultProduct(2, "Oregon Cottage Interior Oak Door", "Doors", 179.99),
+      new DefaultProduct(3, "Oregon Cottage Horizontal Interior White Oak Door", "Doors", 189.99),
+      new DefaultProduct(4, "4 Panel Oak Deco Interior Door", "Doors", 209.09),
+      new DefaultProduct(5, "Worcester 2000 30kW Ng Combi Boiler Includes Free Comfort+ II controller", "Boilers", 989.99),
+      new DefaultProduct(6, "Glow-worm Betacom 4 30kW Combi Gas Boiler ERP", "Boilers", 787.99),
+      new DefaultProduct(7, "Worcester 2000 25kW Ng Combi Boiler with Free Comfort+ II controller", "Boilers", 859.99),
+      new DefaultProduct(8, "Wienerberger Terca Class B Engineering Brick Red 215mm x 102.5mm x 65mm (Pack of 504)", "Bricks", 402.99),
+      new DefaultProduct(9, "Wienerberger Terca Engineering Brick Blue Perforated Class B 65mm (Pack of 400)", "Bricks", 659.99),
+      new DefaultProduct(10, "Wienerberger Engineering Brick Red Smooth Class B 73mm - Pack of 368", "Bricks", 523.99)
+    ];
+  }
 
-// 	static {
-// 		productStoringService = new DefaultProductStoringService();
-// 		loadProductsFromStorage();
-// 	}
+  private constructor() {}
 
-// 	public static void loadProductsFromStorage() {
-// 		products = productStoringService.loadProducts();
-// 	}
-	
-// 	/**
-// 	 * @deprecated use loadProductsFromStorage instead
-// 	 */
-// 	private static void initProducts() {
-// 		products = new ArrayList<>(Arrays.asList(
-// 				new DefaultProduct(1, "Hardwood Oak Suffolk Internal Door", "Doors", 109.99),
-// 				new DefaultProduct(2, "Oregon Cottage Interior Oak Door", "Doors", 179.99),
-// 				new DefaultProduct(3, "Oregon Cottage Horizontal Interior White Oak Door", "Doors", 189.99),
-// 				new DefaultProduct(4, "4 Panel Oak Deco Interior Door", "Doors", 209.09),
-// 				new DefaultProduct(5, "Worcester 2000 30kW Ng Combi Boiler Includes Free Comfort+ II controller", "Boilers", 989.99),
-// 				new DefaultProduct(6, "Glow-worm Betacom 4 30kW Combi Gas Boiler ERP", "Boilers", 787.99),
-// 				new DefaultProduct(7, "Worcester 2000 25kW Ng Combi Boiler with Free Comfort+ II controller", "Boilers", 859.99),
-// 				new DefaultProduct(8, "Wienerberger Terca Class B Engineering Brick Red 215mm x 102.5mm x 65mm (Pack of 504)", "Bricks", 402.99),
-// 				new DefaultProduct(9, "Wienerberger Terca Engineering Brick Blue Perforated Class B 65mm (Pack of 400)", "Bricks", 659.99),
-// 				new DefaultProduct(10, "Wienerberger Engineering Brick Red Smooth Class B 73mm - Pack of 368", "Bricks", 523.99)
-// 		));
-// 	}
-	
-// 	private DefaultProductManagementService() {
-		
-// 	}
+  public static getInstance(): ProductManagementService {
+    if (!this.instance) {
+      this.instance = new DefaultProductManagementService();
+    }
+    return this.instance;
+  }
 
-// 	public static ProductManagementService getInstance() {
-// 		if (instance == null) {
-// 			instance = new DefaultProductManagementService();
-// 		}
-// 		return instance;
-// 	}
+  public getProducts(): Product[]  {
+    return DefaultProductManagementService.products;
+  }
 
-// 	@Override
-// 	public List<Product> getProducts() {
-// 		return products;
-// 	}
-
-// 	@Override
-// 	public Product getProductById(int productIdToAddToCart) {
-// 		for (Product product : products) {
-// 			if (product != null && product.getId() == productIdToAddToCart) {
-// 				return product;
-// 			}
-// 		}
-// 		return null;
-// 	}
-
-// }
+  public getProductById(productIdToAddToCart: number): Product | null {
+    for (const product of DefaultProductManagementService.products) {
+      if (product && product.getId() === productIdToAddToCart) {
+        return product;
+      }
+    }
+    return null;
+  }
+}

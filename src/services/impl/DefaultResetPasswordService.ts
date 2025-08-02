@@ -1,22 +1,21 @@
-//todo
+import { User } from '@src/entities/entitiesInterfaces/User';
+import { ResetPasswordService } from '@src/services/ResetPasswordService';
+import { MailSender } from '@src/utils/mail/MailSender';
+import { DefaultMailSender } from '@src/services/impl/DefaultMailSender'; // Make sure to import this
 
-// package com.itbulls.learnit.javacore.exam.solution.services.impl;
+export class DefaultResetPasswordService implements ResetPasswordService {
+  private mailSender: MailSender;
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
-// import com.itbulls.learnit.javacore.exam.solution.services.ResetPasswordService;
-// import com.itbulls.learnit.javacore.exam.solution.utils.mail.MailSender;
+  constructor() {
+    this.mailSender = DefaultMailSender.getInstance();
+  }
 
-// public class DefaultResetPasswordService implements ResetPasswordService {
-	
-// 	private MailSender mailSender;
-	
-// 	{
-// 		mailSender = DefaultMailSender.getInstance();
-// 	}
-
-// 	@Override
-// 	public void resetPasswordForUser(User user) {
-// 		mailSender.sendEmail(user.getEmail(), "Please, use this password to login: " + user.getPassword());
-// 	}
-
-// }
+  public resetPasswordForUser(user: User): void {
+    const email = user.getEmail();
+    const password = user.getPassword();
+    this.mailSender.sendEmail(
+      email,
+      `Please, use this password to login: ${password}`
+    );
+  }
+}

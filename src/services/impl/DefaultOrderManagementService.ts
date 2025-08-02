@@ -1,59 +1,46 @@
-import com.itbulls.learnit.javacore.exam.solution.enteties.Order;
-import com.itbulls.learnit.javacore.exam.solution.services.OrderManagementService;
-import com.itbulls.learnit.javacore.exam.solution.storage.OrderStoringService;
-import com.itbulls.learnit.javacore.exam.solution.storage.impl.DefaultOrderStoringService;
-
 import { Order } from "@src/entities/entitiesInterfaces/Order";
 import { OrderManagementService } from "@src/services/OrderManagementService";
-import { OrderStoringService} from '@src/storage/OrderStoringService';
-import {}
-
+import { OrderStoringService } from "@src/storage/OrderStoringService";
+import { DefaultOrderStoringService } from "@src/storage/impl/DefaultOrderStoringService";
 
 export class DefaultOrderManagementService implements OrderManagementService {
+  private static instance: DefaultOrderManagementService;
+  private orders: Order[] = [];
+  private orderStoringService: OrderStoringService;
 
-	private static DefaultOrderManagementService instance;
-	private List<Order> orders;
-	private OrderStoringService orderStoringService;
-	
-	{
-		orderStoringService = DefaultOrderStoringService.getInstance();
-		orders = orderStoringService.loadOrders();
-	}
-	
-	public static OrderManagementService getInstance() {
-		if (instance == null) {
-			instance = new DefaultOrderManagementService();
-		}
-		return instance;
-	}
+  private constructor() {
+    this.orderStoringService = DefaultOrderStoringService.getInstance();
+    this.orders = this.orderStoringService.loadOrders() ?? [];
+  }
 
-	@Override
-	public void addOrder(Order order) {
-		if (order == null) {
-			return;
-		}
-		orders.add(order);
-		orderStoringService.saveOrders(orders);
-	}
+  public static getInstance(): OrderManagementService {
+    if (!this.instance) {
+      this.instance = new DefaultOrderManagementService();
+    }
+    return this.instance;
+  }
 
-	@Override
-	public List<Order> getOrdersByUserId(int userId) {
-		return orderStoringService.loadOrders().stream()
-				.filter(Objects::nonNull)
-				.filter(order -> order.getCustomerId() == userId)
-				.collect(Collectors.toList());
-	}
+  public addOrder(order: Order): void {
+    if (!order) return;
 
-	@Override
-	public List<Order> getOrders() {
-		if (orders == null || orders.size() == 0) {
-			orders = orderStoringService.loadOrders();
-		}
-		return this.orders;
-	}
-	
-	void clearServiceState() {
-		orders.clear();
-	}
+    this.orders.push(order);
+    this.orderStoringService.saveOrders(this.orders);
+  }
 
+  public getOrdersByUserId(userId: number): Order[] {
+  return (this.orderStoringService.loadOrders() ?? []).filter(
+    (order) => order.getCustomerId() === userId
+  );
+}
+
+  public getOrders(): Order[] {
+    if (!this.orders || this.orders.length === 0) {
+      this.orders = this.orderStoringService.loadOrders()?? [];
+    }
+    return this.orders;
+  }
+
+  public clearServiceState(): void {
+    this.orders = [];
+  }
 }

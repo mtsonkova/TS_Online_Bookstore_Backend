@@ -1,11 +1,7 @@
-//todo
+import { User } from "@src/entities/entitiesInterfaces/User";
 
-// package com.itbulls.learnit.javacore.exam.solution.services;
-
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
-
-// public interface ResetPasswordService {
+export interface ResetPasswordService {
 	
-// 	void resetPasswordForUser(User user);
+	resetPasswordForUser(user: User): void;
 
-// }
+}

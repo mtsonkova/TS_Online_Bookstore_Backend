@@ -6,6 +6,6 @@ export interface UserManagementService {
 	
 	getUsers(): User[];
 
-	getUserByEmail(userEmail: string): User;
+	getUserByEmail(userEmail: string): User | null;
 
 }

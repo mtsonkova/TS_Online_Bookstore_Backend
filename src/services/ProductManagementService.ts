@@ -1,15 +1,9 @@
-//todo
+import { Product } from "@src/entities/entitiesInterfaces/Product";
 
-// package com.itbulls.learnit.javacore.exam.solution.services;
+export interface ProductManagementService {
 
-// import java.util.List;
+	getProducts(): Product[];
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
+	getProductById(productIdToAddToCart: number): Product | null;
 
-// public interface ProductManagementService {
-
-// 	List<Product> getProducts();
-
-// 	Product getProductById(int productIdToAddToCart);
-
-// }
+}
