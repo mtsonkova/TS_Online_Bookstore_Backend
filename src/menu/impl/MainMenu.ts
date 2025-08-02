@@ -3,7 +3,6 @@ import { Menu } from "@src/menu/Menu";
 import * as readline from "readline";
 import i18n from "i18next";
 
-// Import actual implementations instead of stubs (adjust paths as needed)
 import { SignUpMenu } from "@src/menu/impl/SignUpMenu";
 import { SignInMenu } from "@src/menu/impl/SignInMenu";
 import { SignOutMenu } from "@src/menu/impl/SignOutMenu";
