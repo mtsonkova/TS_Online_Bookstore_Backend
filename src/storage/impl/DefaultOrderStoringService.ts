@@ -1,59 +1,55 @@
-//todo
+import fs from "fs";
+import path from "path";
+import { Order } from "@src/entities/entitiesInterfaces/Order";
+import { OrderStoringService } from "@src/storage/OrderStoringService";
 
-// package com.itbulls.learnit.javacore.exam.solution.storage.impl;
+export class DefaultOrderStoringService implements OrderStoringService {
+  private static readonly ORDERS_DATA_FILE_NAME = "orders.data.json";
+  private static readonly CURRENT_TASK_RESOURCE_FOLDER = "finaltask";
+  private static readonly RESOURCES_FOLDER = "resources";
 
-// import java.io.File;
-// import java.io.FileInputStream;
-// import java.io.FileOutputStream;
-// import java.io.IOException;
-// import java.io.ObjectInputStream;
-// import java.io.ObjectOutputStream;
-// import java.util.List;
+  private static instance: DefaultOrderStoringService;
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Order;
-// import com.itbulls.learnit.javacore.exam.solution.storage.OrderStoringService;
+  private constructor() {}
 
-// public class DefaultOrderStoringService implements OrderStoringService {
+  public saveOrders(orders: Order[]): void {
+    const filePath = path.join(
+      DefaultOrderStoringService.RESOURCES_FOLDER,
+      DefaultOrderStoringService.CURRENT_TASK_RESOURCE_FOLDER,
+      DefaultOrderStoringService.ORDERS_DATA_FILE_NAME
+    );
 
-// 	private static final String ORDERS_DATA_FILE_NAME = "orders.data";
-// 	private static final String CURRENT_TASK_RESOURCE_FOLDER = "finaltask";
-// 	private static final String RESOURCES_FOLDER = "resources";
-	
-// 	private static DefaultOrderStoringService instance;
-	
-// 	private DefaultOrderStoringService() {
-// 	}
-	
-// 	@Override
-// 	public void saveOrders(List<Order> orders) {
-// 		try (var oos = new ObjectOutputStream(new FileOutputStream(
-// 					RESOURCES_FOLDER + File.separator + CURRENT_TASK_RESOURCE_FOLDER
-// 					+ File.separator + ORDERS_DATA_FILE_NAME
-// 				))) {
-// 			oos.writeObject(orders);
-// 		} catch (IOException e) {
-// 			e.printStackTrace();
-// 		}
-// 	}
+    try {
+      fs.writeFileSync(filePath, JSON.stringify(orders, null, 2), "utf-8");
+    } catch (error) {
+      console.error("Error saving orders:", error);
+    }
+  }
 
-// 	@Override
-// 	public List<Order> loadOrders() {
-// 		try (var ois = new ObjectInputStream(new FileInputStream(
-// 				RESOURCES_FOLDER + File.separator + CURRENT_TASK_RESOURCE_FOLDER
-// 				+ File.separator + ORDERS_DATA_FILE_NAME
-// 			))) {
-// 		return (List<Order>) ois.readObject();
-// 	} catch (IOException | ClassNotFoundException e) {
-// 		e.printStackTrace();
-// 	}
-// 		return null;
-// 	}
+  public loadOrders(): Order[] | null {
+    const filePath = path.join(
+      DefaultOrderStoringService.RESOURCES_FOLDER,
+      DefaultOrderStoringService.CURRENT_TASK_RESOURCE_FOLDER,
+      DefaultOrderStoringService.ORDERS_DATA_FILE_NAME
+    );
 
-// 	public static OrderStoringService getInstance() {
-// 		if (instance == null) {
-// 			instance = new DefaultOrderStoringService();
-// 		}
-// 		return instance;
-// 	}
+    try {
+      if (!fs.existsSync(filePath)) {
+        return [];
+      }
 
-// }
+      const data = fs.readFileSync(filePath, "utf-8");
+      return JSON.parse(data) as Order[];
+    } catch (error) {
+      console.error("Error loading orders:", error);
+      return null;
+    }
+  }
+
+  public static getInstance(): OrderStoringService {
+    if (!DefaultOrderStoringService.instance) {
+      DefaultOrderStoringService.instance = new DefaultOrderStoringService();
+    }
+    return DefaultOrderStoringService.instance;
+  }
+}

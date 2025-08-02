@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "resolveJsonModule": true,
     "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
@@ -14,5 +15,5 @@
     "skipLibCheck": true,
     "experimentalDecorators": true
   },
-  "include": ["src", "test"]
+  "include": ["src", "tsconfig.test.json"]
 }

@@ -1,47 +1,44 @@
-//todo
+import fs from "fs";
+import path from "path";
 
-// package com.itbulls.learnit.javacore.exam.solution.storage.impl;
+import { Product } from "@src/entities/entitiesInterfaces/Product";
+import { DefaultProduct } from "@src/entities/impl/DefaultProduct";
+import { ProductStoringService } from "@src/storage/ProductStoringService";
 
-// import java.io.IOException;
-// import java.nio.file.Files;
-// import java.nio.file.Paths;
-// import java.util.Collections;
-// import java.util.List;
-// import java.util.Objects;
-// import java.util.stream.Collectors;
+export class DefaultProductStoringService implements ProductStoringService {
+  private static readonly PRODUCTS_INFO_STORAGE = "products.csv";
+  private static readonly CURRENT_TASK_RESOURCE_FOLDER = "finaltask";
+  private static readonly RESOURCES_FOLDER = "resources";
+  private static readonly PRODUCT_PRICE_INDEX = 3;
+  private static readonly PRODUCT_CATEGORY_INDEX = 2;
+  private static readonly PRODUCT_NAME_INDEX = 1;
+  private static readonly PRODUCT_ID_INDEX = 0;
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.impl.DefaultProduct;
-// import com.itbulls.learnit.javacore.exam.solution.storage.ProductStoringService;
+  public loadProducts(): Product[] {
+    const filePath = path.join(
+      DefaultProductStoringService.RESOURCES_FOLDER,
+      DefaultProductStoringService.CURRENT_TASK_RESOURCE_FOLDER,
+      DefaultProductStoringService.PRODUCTS_INFO_STORAGE
+    );
 
-// public class DefaultProductStoringService implements ProductStoringService {
+    try {
+      const fileContent = fs.readFileSync(filePath, { encoding: "utf-8" });
+      const lines = fileContent.split("\n");
 
-// 	private static final String PRODUCTS_INFO_STORAGE = "products.csv";
-// 	private static final String CURRENT_TASK_RESOURCE_FOLDER = "finaltask";
-// 	private static final String RESOURCES_FOLDER = "resources";
-// 	private static final int PRODUCT_PRICE_INDEX = 3;
-// 	private static final int PRODUCT_CATEGORY_INDEX = 2;
-// 	private static final int PRODUCT_NAME_INDEX = 1;
-// 	private static final int PRODUCT_ID_INDEX = 0;
-
-// 	@Override
-// 	public List<Product> loadProducts() {
-// 		try (var stream = Files.lines(Paths.get(RESOURCES_FOLDER, CURRENT_TASK_RESOURCE_FOLDER, 
-// 										PRODUCTS_INFO_STORAGE))) {
-// 			return stream
-// 					.filter(Objects::nonNull)
-// 					.filter(line -> !line.isEmpty())
-// 					.map(line -> {
-// 				String[] productElements = line.split(",");
-// 				return new DefaultProduct(Integer.valueOf(productElements[PRODUCT_ID_INDEX]), 
-// 											productElements[PRODUCT_NAME_INDEX], 
-// 											productElements[PRODUCT_CATEGORY_INDEX], 
-// 											Double.valueOf(productElements[PRODUCT_PRICE_INDEX]));
-// 			}).collect(Collectors.toList());
-// 		} catch (IOException e) {
-// 			e.printStackTrace();
-// 			return Collections.EMPTY_LIST;
-// 		}
-// 	}
-
-// }
+      return lines
+        .filter(line => line.trim().length > 0)
+        .map(line => {
+          const productElements = line.split(",");
+          return new DefaultProduct(
+            Number(productElements[DefaultProductStoringService.PRODUCT_ID_INDEX]),
+            productElements[DefaultProductStoringService.PRODUCT_NAME_INDEX],
+            productElements[DefaultProductStoringService.PRODUCT_CATEGORY_INDEX],
+            parseFloat(productElements[DefaultProductStoringService.PRODUCT_PRICE_INDEX])
+          );
+        });
+    } catch (err) {
+      console.error("Failed to load products:", err);
+      return [];
+    }
+  }
+}

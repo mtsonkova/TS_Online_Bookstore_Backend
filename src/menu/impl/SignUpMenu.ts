@@ -1,62 +1,61 @@
-//todo
+import { ApplicationContext } from "@src/configs/ApplicationContext";
+import { User } from "@src/entities/entitiesInterfaces/User";
+import { DefaultUser } from "@src/entities/impl/DefaultUser";
+import { Menu } from "@src/menu/Menu";
+import { UserManagementService } from "@src/services/UserManagementService";
+import { DefaultUserManagementService } from "@src/services/impl/DefaultUserManagementService";
+import * as readline from "readline";
+import i18next from "@src/i18n/i18n";
 
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+export class SignUpMenu implements Menu {
+  private userManagementService: UserManagementService;
+  private context: ApplicationContext;
 
-// import java.util.ResourceBundle;
-// import java.util.Scanner;
+  constructor() {
+    this.userManagementService = DefaultUserManagementService.getInstance();
+    this.context = ApplicationContext.getInstance();
+  }
 
-// import com.itbulls.learnit.javacore.exam.solution.configs.ApplicationContext;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.impl.DefaultUser;
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
-// import com.itbulls.learnit.javacore.exam.solution.services.UserManagementService;
-// import com.itbulls.learnit.javacore.exam.solution.services.impl.DefaultUserManagementService;
+  public async start(): Promise<void> {
+    this.printMenuHeader();
 
-// public class SignUpMenu implements Menu {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
 
-// 	private UserManagementService userManagementService;
-// 	private ApplicationContext context;
-// 	private ResourceBundle rb;
+    const ask = (key: string): Promise<string> =>
+      new Promise((resolve) => rl.question(i18next.t(key), resolve));
 
-// 	{
-// 		userManagementService = DefaultUserManagementService.getInstance();
-// 		context = ApplicationContext.getInstance();
-// 		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
-// 	}
+    const firstName = await ask("enter.your.first.name");
+    const lastName = await ask("enter.your.last.name");
+    const password = await ask("enter.your.pass");
+    const email = await ask("enter.your.email");
 
-// 	@Override
-// 	public void start() {
-// 		printMenuHeader();
-		
-// 		Scanner sc = new Scanner(System.in);
-// 		System.out.print(rb.getString("enter.your.first.name"));
-// 		String firstName = sc.next();
-// 		System.out.print(rb.getString("enter.your.last.name"));
-// 		String lastName = sc.next();
-// 		System.out.print(rb.getString("enter.your.pass"));
-// 		String password = sc.next();
-// 		System.out.print(rb.getString("enter.your.email"));
-		
-// 		sc = new Scanner(System.in);
-// 		String email = sc.nextLine();
+    rl.close();
 
-// 		userManagementService.getUsers(); // this is needed to load all users for proper ID generation
-// 		User user = new DefaultUser(firstName, lastName, password, email);
-		
-// 		String errorMessage = userManagementService.registerUser(user);
-// 		if (errorMessage == null || errorMessage.isEmpty()) {
-// 			context.setLoggedInUser(user);
-// 			System.out.println(rb.getString("user.created.msg"));
-// 		} else {
-// 			System.out.println(errorMessage);
-// 		}
+    this.userManagementService.getUsers(); // preload users
 
-// 		context.getMainMenu().start();
-// 	}
+    const user: User = new DefaultUser(undefined, firstName, lastName, password, email);
+    const errorMessage = this.userManagementService.registerUser(user);
 
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println(rb.getString("sign.up.header"));		
-// 	}
+    if (!errorMessage) {
+      this.context.setLoggedInUser(user);
+      console.log(i18next.t("user.created.msg"));
+    } else {
+      console.log(errorMessage);
+    }
 
-// }
+    const mainMenu = this.context.getMainMenu();
+
+if (mainMenu != null) {
+  mainMenu.start();
+} else {
+  console.log("The main menu object is null or undefined.");
+}
+  }
+
+  public printMenuHeader(): void {
+    console.log(i18next.t("sign.up.header"));
+  }
+}

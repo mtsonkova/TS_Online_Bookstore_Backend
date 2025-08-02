@@ -1,15 +1,9 @@
-//todo
+import {User} from '@src/entities/entitiesInterfaces/User';
 
-// package com.itbulls.learnit.javacore.exam.solution.storage;
-
-// import java.util.List;
-
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
-
-// public interface UserStoringService {
+export interface UserStoringService {
 	
-// 	void saveUser(User user);
+	saveUser(user: User):void;
 	
-// 	List<User> loadUsers();
+	loadUsers(): User[];
 	
-// }
+}

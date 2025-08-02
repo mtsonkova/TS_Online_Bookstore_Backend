@@ -1,39 +1,22 @@
-//todo
+// src/utils/validation/DefaultValidator.ts
+import "reflect-metadata";
+import { Validator } from '@src/utils/validation/Validator'
 
-// package com.itbulls.learnit.javacore.exam.solution.utils.validation.impl;
+export class DefaultValidator implements Validator {
+  isValid(obj: object): boolean {
+    const keys = Object.getOwnPropertyNames(obj);
 
-// import java.lang.reflect.Field;
-// import java.util.Arrays;
+    for (const key of keys) {
+      const pattern: string | undefined = Reflect.getMetadata("validate:pattern", obj, key);
+      if (pattern) {
+        const value = (obj as any)[key];
+        if (typeof value === "string" && !value.match(new RegExp(pattern))) {
+          console.log("FALSE", value);
+          return false;
+        }
+      }
+    }
 
-// import com.itbulls.learnit.javacore.exam.solution.annotations.Validate;
-// import com.itbulls.learnit.javacore.exam.solution.utils.validation.Validator;
-
-// public class DefaultValidator implements Validator {
-
-// 	@Override
-// 	public boolean isValid(Object obj) {
-// 		Class clazz = obj.getClass();
-// 		for (Field field : clazz.getDeclaredFields()) {
-// 			Validate validateAnnotation = field.getAnnotation(Validate.class);
-// 			if(validateAnnotation != null) {
-// 				String pattern = validateAnnotation.pattern();
-// 				field.setAccessible(true);
-// 				Object fieldValue = null;
-// 				try {
-// 					fieldValue = field.get(obj);
-// 				} catch (IllegalArgumentException | IllegalAccessException e) {
-// 					e.printStackTrace();
-// 				}
-// 				if (fieldValue instanceof String) {
-// 					if(!((String)fieldValue).matches(pattern)) {
-// 						System.out.println("FALSE " + fieldValue);
-// 						return false;
-// 					}
-// 				}
-// 			}
-// 		}
-		
-// 		return true;
-// 	}
-
-// }
+    return true;
+  }
+}

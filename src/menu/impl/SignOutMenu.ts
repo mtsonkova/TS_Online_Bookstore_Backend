@@ -1,33 +1,29 @@
-//todo
+import { ApplicationContext } from "@src/configs/ApplicationContext";
+import { Menu } from "@src/menu/Menu";
+import i18n from "i18next"; // Assuming you're using i18next
 
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+export class SignOutMenu implements Menu {
+  private context: ApplicationContext;
 
-// import java.util.ResourceBundle;
+  constructor() {
+    this.context = ApplicationContext.getInstance();
+  }
 
-// import com.itbulls.learnit.javacore.exam.solution.configs.ApplicationContext;
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
+  start(): void {
+    this.printMenuHeader();
+    this.context.setLoggedInUser(null);
+    const mainMenu = this.context.getMainMenu();
 
-// public class SignOutMenu implements Menu {
+if (mainMenu) {
+  mainMenu.start();
+} else {
+  console.log("Main menu is null or undefined.");
+}
 
-// 	private ApplicationContext context;
-// 	private ResourceBundle rb;
-	
-// 	{
-// 		context = ApplicationContext.getInstance();
-// 		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
-// 	}
-	
-// 	@Override
-// 	public void start() {
-// 		printMenuHeader();
-// 		context.setLoggedInUser(null);
-// 		context.getMainMenu().start();
-// 	}
+  }
 
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println(rb.getString("sign.out.header"));
-// 		System.out.println(rb.getString("bye.msg"));		
-// 	}
-
-// }
+  printMenuHeader(): void {
+    console.log(i18n.t("sign.out.header"));
+    console.log(i18n.t("bye.msg"));
+  }
+}

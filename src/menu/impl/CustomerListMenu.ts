@@ -1,46 +1,37 @@
-//todo
+import { ApplicationContext } from "@src/configs/ApplicationContext";
+import { User } from "@src/entities/entitiesInterfaces/User";
+import { Menu } from "@src/menu/Menu";
+import { UserManagementService } from "@src/services/UserManagementService";
+import { DefaultUserManagementService } from "@src/services/impl/DefaultUserManagementService";
+import i18n from "i18next";
+import { MainMenu } from "@src/menu/impl/MainMenu"; // Adjust if needed
 
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+export class CustomerListMenu implements Menu {
+  private context: ApplicationContext;
+  private userManagementService: UserManagementService;
 
-// import java.util.List;
-// import java.util.ResourceBundle;
+  constructor() {
+    this.context = ApplicationContext.getInstance();
+    this.userManagementService = DefaultUserManagementService.getInstance();
+  }
 
-// import com.itbulls.learnit.javacore.exam.solution.configs.ApplicationContext;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
-// import com.itbulls.learnit.javacore.exam.solution.services.UserManagementService;
-// import com.itbulls.learnit.javacore.exam.solution.services.impl.DefaultUserManagementService;
+  public start(): void {
+    this.printMenuHeader();
 
-// public class CustomerListMenu implements Menu {
+    const users: User[] = this.userManagementService.getUsers();
 
-// 	private ApplicationContext context;
-// 	private UserManagementService userManagementService;
-// 	private ResourceBundle rb;
-	
-// 	{
-// 		userManagementService = DefaultUserManagementService.getInstance();
-// 		context = ApplicationContext.getInstance();
-// 		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
-// 	}
-	
-// 	@Override
-// 	public void start() {
-// 		printMenuHeader();
-// 		List<User> users = userManagementService.getUsers();
-		
-// 		if (users == null || users.size() == 0) {
-// 			System.out.println(rb.getString("no.users.msg"));
-// 		} else {
-// 			for (User user : users) {
-// 				System.out.println(user);
-// 			}
-// 		}
-// 		context.getMainMenu().start();
-// 	}
+    if (!users || users.length === 0) {
+      console.log(i18n.t("no.users.msg")); // e.g. "No users found."
+    } else {
+      users.forEach((user: User) => {
+        console.log(user); // Consider formatting user details here if needed
+      });
+    }
 
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println(rb.getString("customer.list.header"));		
-// 	}
+    this.context.getMainMenu()?.start();
+  }
 
-// }
+  public printMenuHeader(): void {
+    console.log(i18n.t("customer.list.header")); // e.g. "Customer List"
+  }
+}

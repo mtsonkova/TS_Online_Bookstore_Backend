@@ -1,96 +1,83 @@
-//todo
+import { User } from '@src/entities/entitiesInterfaces/User';
+import { DefaultUser } from '@src/entities/impl/DefaultUser';
+import { UserManagementService } from '@src/services/UserManagementService';
+import { DefaultUserStoringService } from '@src/storage/impl/DefaultUserStoringService';
 
-// package com.itbulls.learnit.javacore.exam.solution.services.impl;
+export class DefaultUserManagementService implements UserManagementService {
+  private static readonly NOT_UNIQUE_EMAIL_ERROR_MESSAGE =
+    'This email is already used by another user. Please, use another email';
+  private static readonly EMPTY_EMAIL_ERROR_MESSAGE =
+    'You have to input email to register. Please, try one more time';
+  private static readonly NO_ERROR_MESSAGE = '';
 
-// import java.util.ArrayList;
-// import java.util.List;
+  private static instance: DefaultUserManagementService;
+  private static defaultUserStoringService: DefaultUserStoringService = DefaultUserStoringService.getInstance();
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.impl.DefaultUser;
-// import com.itbulls.learnit.javacore.exam.solution.services.UserManagementService;
-// import com.itbulls.learnit.javacore.exam.solution.storage.impl.DefaultUserStoringService;
+  private constructor() {}
 
+  public static getInstance(): UserManagementService {
+    if (!DefaultUserManagementService.instance) {
+      DefaultUserManagementService.instance = new DefaultUserManagementService();
+    }
+    return DefaultUserManagementService.instance;
+  }
 
-// public class DefaultUserManagementService implements UserManagementService {
-	
-// 	private static final String NOT_UNIQUE_EMAIL_ERROR_MESSAGE = "This email is already used by another user. Please, use another email";
-// 	private static final String EMPTY_EMAIL_ERROR_MESSAGE = "You have to input email to register. Please, try one more time";
-// 	private static final String NO_ERROR_MESSAGE = "";
-	
-// 	private static DefaultUserManagementService instance;
-// 	private static DefaultUserStoringService defaultUserStoringService;
-	
-// 	static {
-// 		defaultUserStoringService = DefaultUserStoringService.getInstance();
-// 	}
+  public registerUser(user: User | null): string {
+    if (user === null) {
+      return DefaultUserManagementService.NO_ERROR_MESSAGE;
+    }
 
-// 	private DefaultUserManagementService() {
-// 	}
-	
-// 	@Override
-// 	public String registerUser(User user) {
-// 		if (user == null) {
-// 			return NO_ERROR_MESSAGE;
-// 		}
-		
-// 		String errorMessage = checkUniqueEmail(user.getEmail());
-// 		if (errorMessage != null && !errorMessage.isEmpty()) {
-// 			return errorMessage;
-// 		}
-		
-// 		defaultUserStoringService.saveUser(user);
-// 		return NO_ERROR_MESSAGE;
-// 	}
+    const errorMessage = this.checkUniqueEmail(user.getEmail());
+    if (errorMessage) {
+      return errorMessage;
+    }
 
-// 	private String checkUniqueEmail(String email) {
-// 		List<User> users = defaultUserStoringService.loadUsers();
-// 		if (email == null || email.isEmpty()) {
-// 			return EMPTY_EMAIL_ERROR_MESSAGE;
-// 		}
-// 		for (User user : users) {
-// 			if (user != null && 
-// 					user.getEmail() != null &&
-// 					user.getEmail().equalsIgnoreCase(email)) {
-// 				return NOT_UNIQUE_EMAIL_ERROR_MESSAGE;
-// 			}
-// 		}
-// 		return NO_ERROR_MESSAGE;
-// 	}
+    DefaultUserManagementService.defaultUserStoringService.saveUser(user);
+    return DefaultUserManagementService.NO_ERROR_MESSAGE;
+  }
 
-// 	public static UserManagementService getInstance() {
-// 		if (instance == null) {
-// 			instance = new DefaultUserManagementService();
-// 		}
-// 		return instance;
-// 	}
+  private checkUniqueEmail(email: string | null): string {
+    const users = DefaultUserManagementService.defaultUserStoringService.loadUsers();
 
-	
-// 	@Override
-// 	public List<User> getUsers() {
-// 		List<User> users = defaultUserStoringService.loadUsers();
-// 		DefaultUser.setCounter(users.stream()
-// 									.mapToInt(user -> user.getId())
-// 									.max().getAsInt());
-// 		return users;
-// 	}
+    if (!email || email.trim() === '') {
+      return DefaultUserManagementService.EMPTY_EMAIL_ERROR_MESSAGE;
+    }
 
-// 	@Override
-// 	public User getUserByEmail(String userEmail) {
-// 		for (User user : defaultUserStoringService.loadUsers()) {
-// 			if (user != null && user.getEmail().equalsIgnoreCase(userEmail)) {
-// 				return user;
-// 			}
-// 		}
-// 		return null;
-// 	}
-	
-	
-// //	// Stream API version of the method
-// //	@Override
-// //	public User[] getUsers() {
-// //		return Arrays.stream(users)
-// //				.filter(Objects::nonNull)
-// //				.toArray(User[]::new);
-// //	}
+    const emailExists = users.some(
+      user =>
+        user &&
+        user.getEmail() &&
+        user.getEmail().toLowerCase() === email.toLowerCase()
+    );
 
-// }
+    return emailExists
+      ? DefaultUserManagementService.NOT_UNIQUE_EMAIL_ERROR_MESSAGE
+      : DefaultUserManagementService.NO_ERROR_MESSAGE;
+  }
+
+  public getUsers(): User[] {
+    const users = DefaultUserManagementService.defaultUserStoringService.loadUsers();
+
+    const validUserIds = users
+      .filter(user => user && typeof user.getId() === 'number')
+      .map(user => user.getId());
+
+    const maxId = validUserIds.length > 0 ? Math.max(...validUserIds) : 0;
+    DefaultUser.setCounter(maxId);
+
+    return users;
+  }
+
+  public getUserByEmail(userEmail: string): User | null {
+    const users = DefaultUserManagementService.defaultUserStoringService.loadUsers();
+
+    const foundUser = users.find(
+      user =>
+        user &&
+        user.getEmail() &&
+        user.getEmail().toLowerCase() === userEmail.toLowerCase()
+    );
+
+    return foundUser || null;
+  }
+}

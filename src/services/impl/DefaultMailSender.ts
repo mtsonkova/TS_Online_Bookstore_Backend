@@ -1,27 +1,22 @@
-//todo
+import { MailSender } from "@src/utils/mail/MailSender";
 
-// package com.itbulls.learnit.javacore.exam.solution.services.impl;
-
-// import com.itbulls.learnit.javacore.exam.solution.utils.mail.MailSender;
-
-// public class DefaultMailSender implements MailSender {
+export class DefaultMailSender implements MailSender {
 
 	
-// 	private static DefaultMailSender instance;
+	private static instance: DefaultMailSender;
 	
-// 	private DefaultMailSender() {};
+	private constructor() {};
 	
 	
-// 	public static DefaultMailSender getInstance() {
-// 		if (instance == null) {
-// 			instance = new DefaultMailSender();
-// 		}
-// 		return instance;
-// 	}
+	public static getInstance(): DefaultMailSender {
+		if (this.instance == null) {
+			this.instance = new DefaultMailSender();
+		}
+		return this.instance;
+	}
 	
-// 	@Override
-// 	public void sendEmail(String sendTo, String messageToSend) {
-// 		// sending email here
-// 	}
+	public sendEmail(sendTo: string, messageToSend: string): void {
+		// sending email here
+	}
 
-// }
+}

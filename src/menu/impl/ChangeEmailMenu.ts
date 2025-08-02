@@ -1,36 +1,60 @@
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+import { ApplicationContext } from "@src/configs/ApplicationContext";
+import { Menu, ExamConstants } from "@src/menu/Menu";
+import {MainMenu} from "@src/menu/impl/MainMenu";
 
-// import java.util.ResourceBundle;
-// import java.util.Scanner;
+export interface ResourceBundle {
+  getString(key: string): string;
+}
 
-// import com.itbulls.learnit.javacore.exam.solution.configs.ApplicationContext;
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
+// Stub for resource bundle loader function; implement based on your i18n solution
+declare function getResourceBundle(baseName: string): ResourceBundle;
+
+export class ChangeEmailMenu implements Menu {
+  private context: ApplicationContext;
+  private rb: ResourceBundle;
+
+  constructor() {
+    this.context = ApplicationContext.getInstance();
+    this.rb = getResourceBundle(ExamConstants.RESOURCE_BUNDLE_BASE_NAME);
+  }
+
+  public start(): void {
+    this.printMenuHeader();
+
+    this.readUserInput().then((userInput) => {
+     const user = this.context.getLoggedInUser();
+if (user) {
+  user.setEmail(userInput);
+} else {
+  console.error("No logged-in user found.");
+  // You could also handle this case as appropriate, e.g., show an error message or exit.
+}
 
 
-// public class ChangeEmailMenu implements Menu {
+      console.log(this.rb.getString("mail.changed.msg"));
 
-// 	private ApplicationContext context;
-// 	private ResourceBundle rb;
+      // Assuming MainMenu implements Menu interface
+      new MainMenu().start();
+    });
+  }
 
-// 	{
-// 		context = ApplicationContext.getInstance();
-// 		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
-// 	}
+  public printMenuHeader(): void {
+    console.log(this.rb.getString("change.language.header"));
+    process.stdout.write(this.rb.getString("enter.new.email.cta"));
+  }
 
-// 	@Override
-// 	public void start() {
-// 		printMenuHeader();
-// 		Scanner sc = new Scanner(System.in);
-// 		String userInput = sc.next();
-// 		context.getLoggedInUser().setEmail(userInput);
-// 		System.out.println(rb.getString("mail.changed.msg"));
-// 		new MainMenu().start();
-// 	}
+  private readUserInput(): Promise<string> {
+    return new Promise((resolve) => {
+      const readline = require("readline");
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      });
 
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println(rb.getString("change.language.header"));
-// 		System.out.print(rb.getString("enter.new.email.cta"));
-// 	}
-
-// }
+      rl.question("", (answer: string) => {
+        rl.close();
+        resolve(answer.trim());
+      });
+    });
+  }
+}

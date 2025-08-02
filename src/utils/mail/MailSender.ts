@@ -1,9 +1,5 @@
-//todo
-
-// package com.itbulls.learnit.javacore.exam.solution.utils.mail;
-
-// public interface MailSender {
+export interface MailSender {
 	
-// 	void sendEmail(String sendTo, String messageToSend);
+	sendEmail(sendTo: string, messageToSend:string): void;
 
-// }
+}

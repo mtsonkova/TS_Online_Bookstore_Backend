@@ -1,13 +1,6 @@
-//todo
+import { Product } from "@src/entities/entitiesInterfaces/Product";
 
-// package com.itbulls.learnit.javacore.exam.solution.storage;
+export interface ProductStoringService {
+	loadProducts(): Product[];
 
-// import java.util.List;
-
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
-
-// public interface ProductStoringService {
-	
-// 	List<Product> loadProducts();
-
-// }
+}

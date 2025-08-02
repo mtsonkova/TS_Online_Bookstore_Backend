@@ -1,75 +1,82 @@
-//todo
+import fs from "fs";
+import path from "path";
+import { User } from "@src/entities/entitiesInterfaces/User";
+import { DefaultUser } from "@src/entities/impl/DefaultUser";
+import { UserStoringService } from "@src/storage/UserStoringService";
 
-// package com.itbulls.learnit.javacore.exam.solution.storage.impl;
+export class DefaultUserStoringService implements UserStoringService {
+  private static readonly USER_INFO_STORAGE = "users.csv";
+  private static readonly CURRENT_TASK_RESOURCE_FOLDER = "finaltask";
+  private static readonly RESOURCES_FOLDER = "resources";
+  private static readonly USER_EMAIL_INDEX = 4;
+  private static readonly USER_PASSWORD_INDEX = 3;
+  private static readonly USER_LASTNAME_INDEX = 2;
+  private static readonly USER_FIRSTNAME_INDEX = 1;
+  private static readonly USER_ID_INDEX = 0;
 
-// import java.io.IOException;
-// import java.nio.charset.StandardCharsets;
-// import java.nio.file.Files;
-// import java.nio.file.Paths;
-// import java.nio.file.StandardOpenOption;
-// import java.util.Collections;
-// import java.util.List;
-// import java.util.Objects;
-// import java.util.stream.Collectors;
+  private static instance: DefaultUserStoringService;
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.impl.DefaultProduct;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.impl.DefaultUser;
-// import com.itbulls.learnit.javacore.exam.solution.storage.UserStoringService;
+  private constructor() {} // prevent external instantiation
 
-// public class DefaultUserStoringService implements UserStoringService {
+  public static getInstance(): DefaultUserStoringService {
+    if (!DefaultUserStoringService.instance) {
+      DefaultUserStoringService.instance = new DefaultUserStoringService();
+    }
+    return DefaultUserStoringService.instance;
+  }
 
-// 	private static final String USER_INFO_STORAGE = "users.csv";
-// 	private static final String CURRENT_TASK_RESOURCE_FOLDER = "finaltask";
-// 	private static final String RESOURCES_FOLDER = "resources";
-// 	private static final int USER_EMAIL_INDEX = 4;
-// 	private static final int USER_PASSWORD_INDEX = 3;
-// 	private static final int USER_LASTNAME_INDEX = 2;
-// 	private static final int USER_FIRSTNAME_INDEX = 1;
-// 	private static final int USER_ID_INDEX = 0;
-	
-// 	private static DefaultUserStoringService instance;
+  public saveUser(user: User): void {
+    const filePath = path.join(
+      DefaultUserStoringService.RESOURCES_FOLDER,
+      DefaultUserStoringService.CURRENT_TASK_RESOURCE_FOLDER,
+      DefaultUserStoringService.USER_INFO_STORAGE
+    );
 
-// 	@Override
-// 	public void saveUser(User user) {
-// 		try {
-// 			Files.writeString(Paths.get(RESOURCES_FOLDER, CURRENT_TASK_RESOURCE_FOLDER, USER_INFO_STORAGE),
-// 					System.lineSeparator() + convertToStorableString(user), 
-// 					StandardCharsets.UTF_8, StandardOpenOption.CREATE,
-// 					StandardOpenOption.APPEND);
-// 		} catch (IOException e) {
-// 			e.printStackTrace();
-// 		}
-// 	}
+    const data = `\n${this.convertToStorableString(user)}`;
 
-// 	private String convertToStorableString(User user) {
-// 		return user.getId() + "," + user.getFirstName() + "," + user.getLastName() + "," + user.getPassword() + ","
-// 				+ user.getEmail();
-// 	}
+    try {
+      fs.appendFileSync(filePath, data, { encoding: "utf-8", flag: "a" });
+    } catch (err) {
+      console.error("Failed to save user:", err);
+    }
+  }
 
-// 	@Override
-// 	public List<User> loadUsers() {
-// 		try (var stream = Files
-// 				.lines(Paths.get(RESOURCES_FOLDER, CURRENT_TASK_RESOURCE_FOLDER, USER_INFO_STORAGE))) {
-// 			return stream.filter(Objects::nonNull)
-// 							.filter(line -> !line.isEmpty())
-// 							.map(line -> {
-// 								String[] userElements = line.split(",");
-// 								return new DefaultUser(Integer.valueOf(userElements[USER_ID_INDEX]),
-// 										userElements[USER_FIRSTNAME_INDEX], userElements[USER_LASTNAME_INDEX],
-// 										userElements[USER_PASSWORD_INDEX], userElements[USER_EMAIL_INDEX]);
-// 							}).collect(Collectors.toList());
-// 		} catch (IOException e) {
-// 			e.printStackTrace();
-// 			return Collections.EMPTY_LIST;
-// 		}
-// 	}
+  private convertToStorableString(user: User): string {
+    return [
+      user.getId(),
+      user.getFirstName(),
+      user.getLastName(),
+      user.getPassword(),
+      user.getEmail()
+    ].join(",");
+  }
 
-// 	public static DefaultUserStoringService getInstance() {
-// 		if (instance == null) {
-// 			instance = new DefaultUserStoringService();
-// 		}
-// 		return instance;
-// 	}
+  public loadUsers(): User[] {
+    const filePath = path.join(
+      DefaultUserStoringService.RESOURCES_FOLDER,
+      DefaultUserStoringService.CURRENT_TASK_RESOURCE_FOLDER,
+      DefaultUserStoringService.USER_INFO_STORAGE
+    );
 
-// }
+    try {
+      const data = fs.readFileSync(filePath, { encoding: "utf-8" });
+      const lines = data.split("\n");
+
+      return lines
+        .filter(line => line.trim().length > 0)
+        .map(line => {
+          const userElements = line.split(",");
+          return new DefaultUser(
+            Number(userElements[DefaultUserStoringService.USER_ID_INDEX]),
+            userElements[DefaultUserStoringService.USER_FIRSTNAME_INDEX],
+            userElements[DefaultUserStoringService.USER_LASTNAME_INDEX],
+            userElements[DefaultUserStoringService.USER_PASSWORD_INDEX],
+            userElements[DefaultUserStoringService.USER_EMAIL_INDEX]
+          );
+        });
+    } catch (err) {
+      console.error("Failed to load users:", err);
+      return [];
+    }
+  }
+}

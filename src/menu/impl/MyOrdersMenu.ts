@@ -1,57 +1,47 @@
-//todo
+import { ApplicationContext } from "@src/configs/ApplicationContext";
+import { Order } from "@src/entities/entitiesInterfaces/Order";
+import { Menu } from "@src/menu/Menu";
+import { OrderManagementService } from "@src/services/OrderManagementService";
+import { DefaultOrderManagementService } from "@src/services/impl/DefaultOrderManagementService";
+import { MainMenu } from "@src/menu/impl/MainMenu";
+import i18n from "i18next";
 
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+export class MyOrdersMenu implements Menu {
+  private context: ApplicationContext;
+  private orderManagementService: OrderManagementService;
 
-// import java.util.List;
+  constructor() {
+    this.context = ApplicationContext.getInstance();
+    this.orderManagementService = DefaultOrderManagementService.getInstance();
+  }
 
-// import com.itbulls.learnit.javacore.exam.solution.configs.ApplicationContext;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Order;
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
-// import com.itbulls.learnit.javacore.exam.solution.services.OrderManagementService;
-// import com.itbulls.learnit.javacore.exam.solution.services.impl.DefaultOrderManagementService;
+  public start(): void {
+    this.printMenuHeader();
 
+    const user = this.context.getLoggedInUser();
+    if (!user) {
+      console.log(i18n.t("orders.not.logged.in")); // Add this key in your i18n resource
+      new MainMenu().start();
+      return;
+    }
 
-// public class MyOrdersMenu implements Menu {
+    this.printUserOrdersToConsole(user.getId());
+    new MainMenu().start();
+  }
 
-// 	private ApplicationContext context;
-// 	private OrderManagementService orderManagementService;
+  private printUserOrdersToConsole(userId: number): void {
+    const orders: Order[] = this.orderManagementService.getOrdersByUserId(userId);
 
-// 	{
-// 		context = ApplicationContext.getInstance();
-// 		orderManagementService = DefaultOrderManagementService.getInstance();
-// 	}
+    if (!orders || orders.length === 0) {
+      console.log(i18n.t("orders.none")); // Add this key in your i18n resource
+    } else {
+      orders.forEach((order: Order) => {
+        console.log(order); // Customize display as needed
+      });
+    }
+  }
 
-// 	@Override
-// 	public void start() {
-// 		printMenuHeader();
-// 		if (context.getLoggedInUser() == null) {
-// 			System.out.println(
-// 					"Please, log in or create new account to see list of your orders");
-// 			new MainMenu().start();
-// 			return;
-// 		} else {
-// 			printUserOrdersToConsole();
-// 		}
-// 		new MainMenu().start();
-// 	}
-
-// 	private void printUserOrdersToConsole() {
-// 		List<Order> loggedInUserOrders = orderManagementService
-// 				.getOrdersByUserId(context.getLoggedInUser().getId());
-// 		if (loggedInUserOrders == null || loggedInUserOrders.size() == 0) {
-// 			System.out.println(
-// 					"Unfortunately, you don't have any orders yet. "
-// 					+ "Navigate back to main menu to place a new order");
-// 		} else {
-// 			for (Order order : loggedInUserOrders) {
-// 				System.out.println(order);
-// 			}
-// 		}
-// 	}
-
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println("***** MY ORDERS *****");		
-// 	}
-
-// }
+  public printMenuHeader(): void {
+    console.log("***** " + i18n.t("orders.header") + " *****"); // i18n key: orders.header
+  }
+}

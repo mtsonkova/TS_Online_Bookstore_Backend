@@ -1,46 +1,69 @@
-//todo
+import { Menu } from "@src/menu/Menu";
+import { MainMenu } from "@src/menu/impl/MainMenu"; // adjust path if needed
+import * as readline from "readline";
 
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+const RESOURCE_BUNDLE = {
+  "change.language.header": {
+    en: "Change Language",
+    ru: "Сменить язык",
+  },
+  "select.language.cta": {
+    en: "Select language (1 - English, 2 - Russian): ",
+    ru: "Выберите язык (1 - Английский, 2 - Русский): ",
+  },
+};
 
-// import java.util.Locale;
-// import java.util.ResourceBundle;
-// import java.util.Scanner;
+type Language = "en" | "ru";
 
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
+export class ChangeLanguageMenu implements Menu {
+  private static ENGLISH_ID = 1;
+  private static RUSSIAN_ID = 2;
 
-// public class ChangeLanguageMenu implements Menu {
-	
-// 	private static final int ENGLISH_ID = 1;
-// 	private static final int RUSSIAN_ID = 2;
-// 	private ResourceBundle rb;
+  private currentLanguage: Language = "en";
 
-// 	{
-// 		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
-// 	}
+  private getString(key: keyof typeof RESOURCE_BUNDLE): string {
+  return RESOURCE_BUNDLE[key][this.currentLanguage] || key;
+}
 
-// 	@Override
-// 	public void start() {
-// 		printMenuHeader();
-// 		Scanner sc = new Scanner(System.in);
-// 		int languageId = sc.nextInt();
-// 		switch (languageId) {
-		
-// 		case ENGLISH_ID:
-// 			Locale.setDefault(new Locale("en"));
-// 			break;
-		
-// 		case RUSSIAN_ID:
-// 			Locale.setDefault(new Locale("ru"));
-// 			break;
-// 		}
-		
-// 		new MainMenu().start();
-// 	}
 
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println(rb.getString("change.language.header"));
-// 		System.out.print(rb.getString("select.language.cta"));
-// 	}
+  async start() {
+    this.printMenuHeader();
+    const languageId = await this.getUserInput();
 
-// }
+    switch (languageId) {
+      case ChangeLanguageMenu.ENGLISH_ID:
+        this.currentLanguage = "en";
+        break;
+      case ChangeLanguageMenu.RUSSIAN_ID:
+        this.currentLanguage = "ru";
+        break;
+    }
+
+    // Set language globally if needed
+    // For example, you can store it in some global state or context
+
+    // Start MainMenu after language change
+    const mainMenu = new MainMenu();
+    mainMenu.start();
+  }
+
+  printMenuHeader() {
+    console.log(this.getString("change.language.header"));
+    process.stdout.write(this.getString("select.language.cta"));
+  }
+
+  private getUserInput(): Promise<number> {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    return new Promise((resolve) => {
+      rl.question("", (answer) => {
+        rl.close();
+        const num = parseInt(answer.trim(), 10);
+        resolve(num);
+      });
+    });
+  }
+}
