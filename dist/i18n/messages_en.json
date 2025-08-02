@@ -1,0 +1,8 @@
+{
+    "sign.up.header": "Sign Up",
+    "enter.your.first.name": "Enter your first name: ",
+    "enter.your.last.name": "Enter your last name: ",
+    "enter.your.pass": "Enter your password: ",
+    "enter.your.email": "Enter your email: ",
+    "user.created.msg": "User created successfully!"
+}

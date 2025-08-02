@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "test",
+    "outDir": "./dist-test",
+    "module": "CommonJS",
+    "noEmit": true,       // Optional: don't emit JS files if using ts-jest
+    "types": ["jest", "node"]  // Include Jest and Node typings
+  },
+  "include": ["test/**/*.ts"]
+}

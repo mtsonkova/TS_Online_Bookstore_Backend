@@ -4,17 +4,16 @@
     "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "rootDir": "src",              // Change rootDir to 'src' to match your source files
+    "rootDir": "src",
     "outDir": "./dist",
-    "baseUrl": ".",               // Base URL is project root
+    "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"]         // Path alias mapping
+      "@src/*": ["src/*"]
     },
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "experimentalDecorators": true
   },
-  "include": ["src", "test"]
+  "include": ["src"]
 }
-
