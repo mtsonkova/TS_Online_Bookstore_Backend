@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-     "resolveJsonModule": true,
-      "target": "ES2020",
+    "resolveJsonModule": true,
+    "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "rootDir": ".",
+    "rootDir": "src",              // Change rootDir to 'src' to match your source files
     "outDir": "./dist",
-    "baseUrl": ".",
+    "baseUrl": ".",               // Base URL is project root
     "paths": {
-      "@src/*": ["src/*"]
+      "@src/*": ["src/*"]         // Path alias mapping
     },
     "strict": true,
     "esModuleInterop": true,
@@ -17,3 +17,4 @@
   },
   "include": ["src", "test"]
 }
+
