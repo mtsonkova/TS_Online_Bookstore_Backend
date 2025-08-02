@@ -1,38 +1,65 @@
-//todo
+import { ApplicationContext } from "@src/configs/ApplicationContext";
+import { Menu } from "@src/menu/Menu";
+import * as readline from "readline";
+import { MainMenu } from "./MainMenu"; // adjust path if necessary
 
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+const RESOURCE_BUNDLE = {
+  "change.password.header": {
+    en: "Change Password",
+    ru: "Сменить пароль",
+  },
+  "enter.new.pass.cta": {
+    en: "Enter new password: ",
+    ru: "Введите новый пароль: ",
+  },
+  "change.password.msg": {
+    en: "Password changed successfully!",
+    ru: "Пароль успешно изменён!",
+  },
+};
 
-// import java.util.ResourceBundle;
-// import java.util.Scanner;
+type Language = "en" | "ru";
 
-// import com.itbulls.learnit.javacore.exam.solution.configs.ApplicationContext;
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
+export class ChangePasswordMenu implements Menu {
+  private context = ApplicationContext.getInstance();
+  private currentLanguage: Language = "en";
 
-// public class ChangePasswordMenu implements Menu {
-	
-// 	private ApplicationContext context;
-// 	private ResourceBundle rb;
-	
-// 	{
-// 		context = ApplicationContext.getInstance();
-// 		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
-		
-// 	}
+  private getString(key: keyof typeof RESOURCE_BUNDLE): string {
+    return RESOURCE_BUNDLE[key][this.currentLanguage] ?? key;
+  }
 
-// 	@Override
-// 	public void start() {
-// 		printMenuHeader();
-// 		Scanner sc = new Scanner(System.in);
-// 		String userInput = sc.next();
-// 		context.getLoggedInUser().setPassword(userInput);
-// 		System.out.println(rb.getString("change.password.msg"));
-// 		new MainMenu().start();
-// 	}
+  async start() {
+    this.printMenuHeader();
+    const userInput = await this.getUserInput();
 
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println(rb.getString("change.password.header"));
-// 		System.out.print(rb.getString("enter.new.pass.cta"));		
-// 	}
+    const loggedInUser = this.context.getLoggedInUser();
+    if (loggedInUser) {
+      loggedInUser.setPassword(userInput);
+      console.log(this.getString("change.password.msg"));
+    } else {
+      console.log("No user is currently logged in.");
+    }
 
-// }
+    const mainMenu = new MainMenu();
+    mainMenu.start();
+  }
+
+  printMenuHeader() {
+    console.log(this.getString("change.password.header"));
+    process.stdout.write(this.getString("enter.new.pass.cta"));
+  }
+
+  private getUserInput(): Promise<string> {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    return new Promise((resolve) => {
+      rl.question("", (answer) => {
+        rl.close();
+        resolve(answer.trim());
+      });
+    });
+  }
+}

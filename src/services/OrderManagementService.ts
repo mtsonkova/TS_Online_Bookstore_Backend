@@ -1,17 +1,11 @@
-//todo
+import {Order} from '@src/entities/entitiesInterfaces/Order';
 
-// package com.itbulls.learnit.javacore.exam.solution.services;
+export interface OrderManagementService {
 
-// import java.util.List;
+	addOrder(order: Order): void;
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Order;
-
-// public interface OrderManagementService {
-
-// 	void addOrder(Order order);
-
-// 	List<Order> getOrdersByUserId(int userId);
+	getOrdersByUserId(userId: number): Order[];
 	
-// 	List<Order> getOrders();
+	getOrders(): Order[];
 
-// }
+}

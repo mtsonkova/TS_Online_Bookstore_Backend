@@ -1,17 +1,11 @@
-//todo
+import { User } from "@src/entities/entitiesInterfaces/User";
 
-// package com.itbulls.learnit.javacore.exam.solution.services;
+export interface UserManagementService {
 
-// import java.util.List;
-
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
-
-// public interface UserManagementService {
-
-// 	String registerUser(User user);
+	registerUser(user: User): string;
 	
-// 	List<User> getUsers();
+	getUsers(): User[];
 
-// 	User getUserByEmail(String userEmail);
+	getUserByEmail(userEmail: string): User;
 
-// }
+}

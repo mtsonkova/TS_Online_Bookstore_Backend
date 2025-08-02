@@ -1,24 +1,19 @@
-//todo
+// src/utils/comparators/CustomProductComparator.ts
+import { Product } from "@src/entities/entitiesInterfaces/Product";
 
-// package com.itbulls.learnit.javacore.exam.solution.utils.comparators;
+export class CustomProductComparator {
+  compare(product1: Product, product2: Product): number {
+    let result = product1.getCategoryName().localeCompare(product2.getCategoryName());
 
-// import java.util.Comparator;
+    if (result === 0) {
+      const priceDelta = product1.getPrice() - product2.getPrice();
+      result = priceDelta < 0 ? -1 : priceDelta === 0 ? 0 : 1;
+    }
 
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
+    if (result === 0) {
+      result = product1.getProductName().localeCompare(product2.getProductName());
+    }
 
-// public class CustomProductComparator implements Comparator<Product> {
-
-// 	@Override
-// 	public int compare(Product product1, Product product2) {
-// 		int result = product1.getCategoryName().compareTo(product2.getCategoryName());
-// 		if (result == 0) {
-// 			double priceDelta = product1.getPrice() - product2.getPrice();
-// 			result = priceDelta < 0 ? -1 : (priceDelta == 0) ? 0 : 1;
-// 		}
-// 		if (result == 0) {
-// 			result = product1.getProductName().compareTo(product2.getProductName());
-// 		}
-// 		return result;
-// 	}
-
-// }
+    return result;
+  }
+}

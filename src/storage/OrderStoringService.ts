@@ -1,14 +1,8 @@
-//todo
+import { Order } from "@src/entities/entitiesInterfaces/Order";
 
-// package com.itbulls.learnit.javacore.exam.solution.storage;
-
-// import java.util.List;
-
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Order;
-
-// public interface OrderStoringService {
+export interface OrderStoringService {
 	
-// 	void saveOrders(List<Order> order);
+	saveOrders(order: Order[]): void;
 	
-// 	List<Order> loadOrders();
-// }
+	loadOrders(): Order[];
+}

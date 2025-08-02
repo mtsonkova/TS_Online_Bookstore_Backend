@@ -1,9 +1,5 @@
-//todo
-
-// package com.itbulls.learnit.javacore.exam.solution.utils.validation;
-
-// public interface Validator {
+export interface Validator {
 	
-// 	boolean isValid(Object obj);
+	 isValid(obj: Object): boolean;
 
-// }
+}
