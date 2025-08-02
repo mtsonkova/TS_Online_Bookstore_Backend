@@ -15,5 +15,5 @@
     "skipLibCheck": true,
     "experimentalDecorators": true
   },
-  "include": ["src", "tsconfig.test.json"]
+  "include": ["src", "src/tsconfig.test.json"]
 }

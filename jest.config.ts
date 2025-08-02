@@ -7,10 +7,17 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: "coverage",
 
- moduleNameMapper: {
-  '^@src/(.*)$': '<rootDir>/src/$1',
-},
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.test.json'
+    }
+  },
 
+  moduleNameMapper: {
+    '^@src/(.*)$': '<rootDir>/src/$1',
+  },
+
+  testMatch: ['**/test/**/*.test.ts'] // Optional: ensures only test files are matched
 };
 
 export default config;
