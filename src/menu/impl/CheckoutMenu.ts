@@ -45,7 +45,15 @@ export class CheckoutMenu implements Menu {
 
     order.setCreditCardNumber(creditCardNumber);
     order.setProducts(this.context.getSessionCart().getProducts());
-    order.setCustomerId(this.context.getLoggedInUser().getId());
+    const loggedInUser = this.context.getLoggedInUser();
+
+if (!loggedInUser) {
+  console.log("No logged in user found. Please log in first.");
+  return false; // or handle appropriately
+}
+
+order.setCustomerId(loggedInUser.getId());
+
     this.orderManagementService.addOrder(order);
     return true;
   }

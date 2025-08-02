@@ -2,7 +2,7 @@ import { ApplicationContext } from "@src/configs/ApplicationContext";
 import { Menu, ExamConstants } from "@src/menu/Menu";
 import {MainMenu} from "@src/menu/impl/MainMenu";
 
-interface ResourceBundle {
+export interface ResourceBundle {
   getString(key: string): string;
 }
 

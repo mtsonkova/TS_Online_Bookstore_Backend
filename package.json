@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/mtsonkova/TS_Online_Bookstore_Backend#readme",
   "devDependencies": {
+    "@types/i18next": "^12.1.0",
     "@types/jest": "^30.0.0",
     "@types/object-hash": "^3.0.6",
     "@types/readline-sync": "^1.4.8",
@@ -28,6 +29,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "i18next": "^25.3.2",
     "object-hash": "^3.0.0",
     "readline-sync": "^1.4.10",
     "reflect-metadata": "^0.2.2"

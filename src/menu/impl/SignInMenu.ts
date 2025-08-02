@@ -1,53 +1,65 @@
-//todo
+import { ApplicationContext } from "@src/configs/ApplicationContext";
+import { User } from "@src/entities/entitiesInterfaces/User";
+import { Menu } from "@src/menu/Menu";
+import { UserManagementService } from "@src/services/UserManagementService";
+import { DefaultUserManagementService } from "@src/services/impl/DefaultUserManagementService";
+import i18n from "i18next";
 
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+export class SignInMenu implements Menu {
+  private context: ApplicationContext;
+  private userManagementService: UserManagementService;
 
-// import java.util.ResourceBundle;
-// import java.util.Scanner;
+  constructor() {
+    this.context = ApplicationContext.getInstance();
+    this.userManagementService = DefaultUserManagementService.getInstance();
+  }
 
-// import com.itbulls.learnit.javacore.exam.solution.configs.ApplicationContext;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.User;
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
-// import com.itbulls.learnit.javacore.exam.solution.services.UserManagementService;
-// import com.itbulls.learnit.javacore.exam.solution.services.impl.DefaultUserManagementService;
+  async start(): Promise<void> {
+    this.printMenuHeader();
 
-// public class SignInMenu implements Menu {
+    // For input, you might use prompt-sync or any other input method depending on your environment.
+    // Here, I'll use a simple prompt function for demonstration (you might replace it with your own input logic)
+    const userEmail = await this.prompt(i18n.t("please.enter.email"));
+    const userPassword = await this.prompt(i18n.t("please.enter.pass"));
 
-// 	private ApplicationContext context;
-// 	private UserManagementService userManagementService;
-// 	private ResourceBundle rb;
+    const user: User | null = this.userManagementService.getUserByEmail(userEmail);
 
-// 	{
-// 		context = ApplicationContext.getInstance();
-// 		userManagementService = DefaultUserManagementService.getInstance();
-// 		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
-// 	}
+    if (user && user.getPassword() === userPassword) {
+      console.log(
+        i18n.t("glad.to.see.you.back", {
+          firstName: user.getFirstName(),
+          lastName: user.getLastName(),
+        })
+      );
+      this.context.setLoggedInUser(user);
+    } else {
+      console.log(i18n.t("login.and.password.not.exist"));
+    }
 
-// 	@Override
-// 	public void start() {
-// 		printMenuHeader();
-// 		Scanner sc = new Scanner(System.in);
+    const mainMenu = this.context.getMainMenu();
+    if (mainMenu) {
+      mainMenu.start();
+    } else {
+      console.log("Main menu is not available.");
+    }
+  }
 
-// 		System.out.print(rb.getString("please.enter.email"));
-// 		String userEmail = sc.next();
+  printMenuHeader(): void {
+    console.log(i18n.t("sign.in.header"));
+  }
 
-// 		System.out.print(rb.getString("please.enter.pass"));
-// 		String userPassword = sc.next();
-
-// 		User user = userManagementService.getUserByEmail(userEmail);
-// 		if (user != null && user.getPassword().equals(userPassword)) {
-// 			System.out.printf(rb.getString("glad.to.see.you.back"), user.getFirstName(),
-// 					user.getLastName() + System.lineSeparator());
-// 			context.setLoggedInUser(user);
-// 		} else {
-// 			System.out.println(rb.getString("login.and.password.not.exist"));
-// 		}
-// 		context.getMainMenu().start();
-// 	}
-
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println(rb.getString("sign.in.header"));		
-// 	}
-
-// }
+  // Helper method to simulate input (replace with actual input logic)
+  private prompt(question: string): Promise<string> {
+    return new Promise((resolve) => {
+      // For example, if running in Node.js, use 'readline' to get input from terminal
+      const readline = require("readline").createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      });
+      readline.question(question + " ", (answer: string) => {
+        readline.close();
+        resolve(answer.trim());
+      });
+    });
+  }
+}

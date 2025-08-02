@@ -1,105 +1,103 @@
-//todo
+import { ApplicationContext } from "@src/configs/ApplicationContext";
+import { Cart } from "@src/entities/entitiesInterfaces/Cart";
+import { Product } from "@src/entities/entitiesInterfaces/Product";
+import { Menu } from "@src/menu/Menu";
+import { ProductManagementService } from "@src/services/ProductManagementService";
+import { DefaultProductManagementService } from "@src/services/impl/DefaultProductManagementService";
+import i18n from "i18next";
+import { MainMenu } from "@src/menu/impl/MainMenu"; // adjust paths as needed
+import { CheckoutMenu } from "@src/menu/impl/CheckoutMenu";
 
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+export class ProductCatalogMenu implements Menu {
+  private static readonly CHECKOUT_COMMAND = "checkout";
+  private context: ApplicationContext;
+  private productManagementService: ProductManagementService;
 
-// import java.util.List;
-// import java.util.ResourceBundle;
-// import java.util.Scanner;
+  constructor() {
+    this.context = ApplicationContext.getInstance();
+    this.productManagementService = DefaultProductManagementService.getInstance();
+  }
 
-// import com.itbulls.learnit.javacore.exam.solution.configs.ApplicationContext;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Cart;
-// import com.itbulls.learnit.javacore.exam.solution.enteties.Product;
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
-// import com.itbulls.learnit.javacore.exam.solution.services.ProductManagementService;
-// import com.itbulls.learnit.javacore.exam.solution.services.impl.DefaultProductManagementService;
+  async start(): Promise<void> {
+    let menuToNavigate: Menu | null = null;
 
-// public class ProductCatalogMenu implements Menu {
+    while (true) {
+      this.printMenuHeader();
+      this.printProductsToConsole();
 
-// 	private static final String CHECKOUT_COMMAND = "checkout";
-// 	private ApplicationContext context;
-// 	private ProductManagementService productManagementService;
-// 	private ResourceBundle rb;
+      const userInput = await this.readUserInput();
 
-// 	{
-// 		context = ApplicationContext.getInstance();
-// 		productManagementService = DefaultProductManagementService.getInstance();
-// 		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
-// 	}
+      const user = this.context.getLoggedInUser();
+      if (!user) {
+        console.log(i18n.t("not.logged.in.msg"));
+        menuToNavigate = new MainMenu();
+        break;
+      }
 
-// 	@Override
-// 	public void start() {
-// 		Menu menuToNavigate = null;
-// 		while (true) {
-// 			printMenuHeader();
-// 			printProductsToConsole();
-			
-// 			String userInput = readUserInput();
-			
-// 			if (context.getLoggedInUser() == null) {
-// 				menuToNavigate = new MainMenu();
-// 				System.out.println(rb.getString("not.logged.in.msg"));
-// 				break;
-// 			}
-			
-// 			if (userInput.equalsIgnoreCase(MainMenu.MENU_COMMAND)) {
-// 				menuToNavigate = new MainMenu();
-// 				break;
-// 			}
-			
-// 			if (userInput.equalsIgnoreCase(CHECKOUT_COMMAND)) {
-// 				Cart sessionCart = context.getSessionCart();
-// 				if (sessionCart == null || sessionCart.isEmpty()) {
-// 					System.out.println(rb.getString("empty.cart.err.msg"));
-// 				} else {
-// 					menuToNavigate = new CheckoutMenu();
-// 					break;
-// 				}
-// 			} else {
-// 				Product productToAddToCart = fetchProduct(userInput);
-				
-// 				if (productToAddToCart == null) {
-// 					System.out.println(rb.getString("enter.product.id"));
-// 					continue;
-// 				}
-				
-// 				processAddToCart(productToAddToCart);
-// 			}
-// 		}
-		
-// 		menuToNavigate.start();
-// 	}
+      if (userInput.toLowerCase() === MainMenu.MENU_COMMAND.toLowerCase()) {
+        menuToNavigate = new MainMenu();
+        break;
+      }
 
-// 	private String readUserInput() {
-// 		System.out.print(rb.getString("proceed.to.checkout"));
-// 		Scanner sc = new Scanner(System.in);
-// 		String userInput = sc.next();
-// 		return userInput;
-// 	}
+      if (userInput.toLowerCase() === ProductCatalogMenu.CHECKOUT_COMMAND) {
+        const sessionCart = this.context.getSessionCart();
+        if (!sessionCart || sessionCart.isEmpty()) {
+          console.log(i18n.t("empty.cart.err.msg"));
+        } else {
+          menuToNavigate = new CheckoutMenu();
+          break;
+        }
+      } else {
+        const productToAddToCart = this.fetchProduct(userInput);
 
-// 	private void printProductsToConsole() {
-// 		List<Product> products = productManagementService.getProducts();
-// 		if (products != null) {
-// 			for (Product product : products) {
-// 				System.out.println(product);
-// 			}
-// 		}
-// 	}
+        if (!productToAddToCart) {
+          console.log(i18n.t("enter.product.id"));
+          continue;
+        }
 
-// 	private Product fetchProduct(String userInput) {
-// 		int productIdToAddToCart = Integer.parseInt(userInput);
-// 		Product productToAddToCart = productManagementService.getProductById(productIdToAddToCart);
-// 		return productToAddToCart;
-// 	}
+        this.processAddToCart(productToAddToCart);
+      }
+    }
 
-// 	private void processAddToCart(Product productToAddToCart) {
-// 		context.getSessionCart().addProduct(productToAddToCart);
-// 		System.out.printf(rb.getString("product.added.to.cart"), productToAddToCart.getProductName());
-// 	}
+    menuToNavigate?.start();
+  }
 
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println(rb.getString("product.catalog.header"));
-// 		System.out.println(rb.getString("catalog.cta"));		
-// 	}
+  printMenuHeader(): void {
+    console.log(i18n.t("product.catalog.header"));
+    console.log(i18n.t("catalog.cta"));
+  }
 
-// }
+  private async readUserInput(): Promise<string> {
+    return new Promise((resolve) => {
+      const readline = require("readline").createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      });
+
+      readline.question(i18n.t("proceed.to.checkout") + " ", (answer: string) => {
+        readline.close();
+        resolve(answer.trim());
+      });
+    });
+  }
+
+  private printProductsToConsole(): void {
+    const products = this.productManagementService.getProducts();
+    if (products && products.length > 0) {
+      for (const product of products) {
+        console.log(product.toString()); // Ensure Product has a .toString() method or format it manually
+      }
+    }
+  }
+
+  private fetchProduct(userInput: string): Product | null {
+    const productId = parseInt(userInput, 10);
+    if (isNaN(productId)) return null;
+    return this.productManagementService.getProductById(productId) || null;
+  }
+
+  private processAddToCart(product: Product): void {
+    this.context.getSessionCart().addProduct(product);
+    console.log(i18n.t("product.added.to.cart", { productName: product.getProductName() }));
+  }
+}

@@ -1,30 +1,25 @@
-// import com.itbulls.learnit.javacore.exam.solution.Main;
-
 import { ApplicationContext } from "@src/configs/ApplicationContext";
 import { Menu } from "@src/menu/Menu";
 import * as readline from "readline";
+import i18n from "i18next";
+
+// Import actual implementations instead of stubs (adjust paths as needed)
+import { SignUpMenu } from "@src/menu/impl/SignUpMenu";
+import { SignInMenu } from "@src/menu/impl/SignInMenu";
+import { SignOutMenu } from "@src/menu/impl/SignOutMenu";
+import { ProductCatalogMenu } from "@src/menu/impl/ProductCatalogMenu";
+import { MyOrdersMenu } from "@src/menu/impl/MyOrdersMenu";
+import { SettingsMenu } from "@src/menu/impl/SettingsMenu";
+import { CustomerListMenu } from "@src/menu/impl/CustomerListMenu";
+import { ResetPasswordMenu } from "@src/menu/impl/ResetPasswordMenu";
+import { ChangeLanguageMenu } from "@src/menu/impl/ChangeLanguageMenu";
 
 export class MainMenu implements Menu {
   public static readonly MENU_COMMAND = "menu";
-  private rb: Record<string, string>;
   private context: ApplicationContext;
 
   constructor() {
     this.context = ApplicationContext.getInstance();
-    // Assuming you have some localization json or object instead of ResourceBundle
-    this.rb = this.loadResourceBundle("RESOURCE_BUNDLE_BASE_NAME");
-  }
-
-  private loadResourceBundle(bundleName: string): Record<string, string> {
-    // Dummy implementation: replace with your localization loader
-    // For example, load a JSON file or object
-    return {
-      "user.input": "Please enter your command: ",
-      "err.msg": "Invalid input. Try again.",
-      "main.menu.header": "=== Main Menu ===",
-      "menu.for.not.logged.in.user": "You are not logged in.",
-      "menu.for.logged.in.user": "Welcome back, user!",
-    };
   }
 
   async start(): Promise<void> {
@@ -43,16 +38,17 @@ export class MainMenu implements Menu {
       this.printMenuHeader();
 
       const userInput = await new Promise<string>((resolve) =>
-        rl.question(this.rb["user.input"], resolve)
+        rl.question(i18n.t("user.input") + " ", resolve)
       );
 
       if (userInput.toLowerCase() === MainMenu.MENU_COMMAND) {
+        rl.close();
         process.exit(0);
       }
 
       const commandNumber = parseInt(userInput, 10);
       if (isNaN(commandNumber)) {
-        console.log(this.rb["err.msg"]);
+        console.log(i18n.t("err.msg"));
         continue mainLoop;
       }
 
@@ -61,11 +57,9 @@ export class MainMenu implements Menu {
           menuToNavigate = new SignUpMenu();
           break mainLoop;
         case 2:
-          if (!this.context.getLoggedInUser()) {
-            menuToNavigate = new SignInMenu();
-          } else {
-            menuToNavigate = new SignOutMenu();
-          }
+          menuToNavigate = this.context.getLoggedInUser()
+            ? new SignOutMenu()
+            : new SignInMenu();
           break mainLoop;
         case 3:
           menuToNavigate = new ProductCatalogMenu();
@@ -86,7 +80,7 @@ export class MainMenu implements Menu {
           menuToNavigate = new ChangeLanguageMenu();
           break mainLoop;
         default:
-          console.log(this.rb["err.msg"]);
+          console.log(i18n.t("err.msg"));
           continue mainLoop;
       }
     }
@@ -99,40 +93,11 @@ export class MainMenu implements Menu {
   }
 
   printMenuHeader(): void {
-    console.log(this.rb["main.menu.header"]);
+    console.log(i18n.t("main.menu.header"));
     if (!this.context.getLoggedInUser()) {
-      console.log(this.rb["menu.for.not.logged.in.user"]);
+      console.log(i18n.t("menu.for.not.logged.in.user"));
     } else {
-      console.log(this.rb["menu.for.logged.in.user"]);
+      console.log(i18n.t("menu.for.logged.in.user"));
     }
   }
-}
-
-// Stub classes for other menus referenced in switch statement
-class SignUpMenu implements Menu {
-  async start() { /*...*/ }
-}
-class SignInMenu implements Menu {
-  async start() { /*...*/ }
-}
-class SignOutMenu implements Menu {
-  async start() { /*...*/ }
-}
-class ProductCatalogMenu implements Menu {
-  async start() { /*...*/ }
-}
-class MyOrdersMenu implements Menu {
-  async start() { /*...*/ }
-}
-class SettingsMenu implements Menu {
-  async start() { /*...*/ }
-}
-class CustomerListMenu implements Menu {
-  async start() { /*...*/ }
-}
-class ResetPasswordMenu implements Menu {
-  async start() { /*...*/ }
-}
-class ChangeLanguageMenu implements Menu {
-  async start() { /*...*/ }
 }

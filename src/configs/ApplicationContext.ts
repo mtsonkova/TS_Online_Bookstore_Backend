@@ -19,7 +19,7 @@ export class ApplicationContext {
 }
 
 	
-	public setLoggedInUser(user: User): void {
+	public setLoggedInUser(user: User | null): void {
 		if (this.sessionCart != null) {
 			this.sessionCart.clear(); // we have to clear session cart when new user is logged in
 		}

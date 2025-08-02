@@ -1,66 +1,71 @@
-//todo
+import { ApplicationContext } from "@src/configs/ApplicationContext";
+import { Menu } from "@src/menu/Menu";
+import i18n from "i18next";
+import { MainMenu } from "@src/menu/impl/MainMenu"; // Adjust path as needed
+import { ChangePasswordMenu } from "@src/menu/impl/ChangePasswordMenu"; // Adjust path as needed
+import { ChangeEmailMenu } from "@src/menu/impl/ChangeEmailMenu"; // Adjust path as needed
 
-// package com.itbulls.learnit.javacore.exam.solution.menu.impl;
+export class SettingsMenu implements Menu {
+  private context: ApplicationContext;
 
-// import java.util.ResourceBundle;
-// import java.util.Scanner;
+  constructor() {
+    this.context = ApplicationContext.getInstance();
+  }
 
-// import com.itbulls.learnit.javacore.exam.solution.configs.ApplicationContext;
-// import com.itbulls.learnit.javacore.exam.solution.menu.Menu;
+  async start(): Promise<void> {
+    let menuToNavigate: Menu | null = null;
 
-// public class SettingsMenu implements Menu {
+    mainLoop: while (true) {
+      this.printMenuHeader();
 
-// 	private ApplicationContext context;
-// 	private ResourceBundle rb;
-	
-// 	{
-// 		context = ApplicationContext.getInstance();
-// 		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
-// 	}
+      if (this.context.getLoggedInUser() == null) {
+        console.log(
+          "Please, log in or create new account to change your account settings"
+        );
+        new MainMenu().start();
+        return;
+      } else {
+        console.log(i18n.t("settings.options"));
+        const userInput = await this.prompt(i18n.t("enter.option"));
 
-// 	@Override
-// 	public void start() {
-// 		Menu menuToNavigate = null;
-// 		mainLoop: while (true) {
-// 			printMenuHeader();
-// 			if (context.getLoggedInUser() == null) {
-// 				System.out.println(
-// 						"Please, log in or create new account to change your account settings");
-// 				new MainMenu().start();
-// 				return;
-// 			} else {
-// 				System.out.println(rb.getString("settings.options"));
-// 				System.out.print(rb.getString("enter.option"));
-// 				Scanner sc = new Scanner(System.in);
-// 				String userInput = sc.next();
+        if (userInput.toLowerCase() === MainMenu.MENU_COMMAND.toLowerCase()) {
+          menuToNavigate = new MainMenu();
+          break mainLoop;
+        }
 
-// 				if (userInput.equalsIgnoreCase(MainMenu.MENU_COMMAND)) {
-// 					menuToNavigate = new MainMenu();
-// 					break mainLoop;
-// 				}
+        const userOption = Number(userInput);
+        switch (userOption) {
+          case 1:
+            menuToNavigate = new ChangePasswordMenu();
+            break mainLoop;
+          case 2:
+            menuToNavigate = new ChangeEmailMenu();
+            break mainLoop;
+          default:
+            console.log(i18n.t("settings.option.validation.msg"));
+            continue;
+        }
+      }
+    }
 
-// 				int userOption = Integer.parseInt(userInput);
-// 				switch (userOption) {
-// 				case 1:
-// 					menuToNavigate = new ChangePasswordMenu();
-// 					break mainLoop;
-// 				case 2:
-// 					menuToNavigate = new ChangeEmailMenu();
-// 					break mainLoop;
-// 				default:
-// 					System.out.println(rb.getString("settings.option.validation.msg"));
-// 					continue;
-// 				}
-// 			}
-// 		}
+    menuToNavigate?.start();
+  }
 
-// 		menuToNavigate.start();
+  printMenuHeader(): void {
+    console.log(i18n.t("settings.menu.header"));
+  }
 
-// 	}
-
-// 	@Override
-// 	public void printMenuHeader() {
-// 		System.out.println(rb.getString("settings.menu.header"));		
-// 	}
-
-// }
+  // Helper to prompt user input via console (Node.js environment)
+  private prompt(question: string): Promise<string> {
+    return new Promise((resolve) => {
+      const readline = require("readline").createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      });
+      readline.question(question + " ", (answer: string) => {
+        readline.close();
+        resolve(answer.trim());
+      });
+    });
+  }
+}
