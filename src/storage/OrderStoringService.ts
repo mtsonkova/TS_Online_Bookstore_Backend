@@ -4,5 +4,5 @@ export interface OrderStoringService {
 	
 	saveOrders(order: Order[]): void;
 	
-	loadOrders(): Order[];
+	loadOrders(): Order[] | null;
 }
