@@ -1,5 +1,6 @@
 import { ApplicationContext } from "src/configs/ApplicationContext";
 import { Menu } from "src/menu/Menu";
+import { Main } from "src/index"; // Import Main to access EXIT_COMMAND
 import * as readline from "readline";
 import i18n from "i18next";
 
@@ -15,6 +16,25 @@ import { ChangeLanguageMenu } from "src/menu/impl/ChangeLanguageMenu";
 
 export class MainMenu implements Menu {
   public static readonly MENU_COMMAND = "menu";
+
+  private static readonly MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER = 
+    "Please, enter number in console to proceed.\n" +
+    "1. Sign Up\n" +
+    "2. Sign In\n" +
+    "3. Product Catalog\n" +
+    "4. My Orders\n" +
+    "5. Settings\n" +
+    "6. Customer List";
+
+  private static readonly MAIN_MENU_TEXT_FOR_LOGGED_IN_USER = 
+    "Please, enter number in console to proceed.\n" +
+    "1. Sign Up\n" +
+    "2. Sign Out\n" +
+    "3. Product Catalog\n" +
+    "4. My Orders\n" +
+    "5. Settings\n" +
+    "6. Customer List";
+
   private context: ApplicationContext;
 
   constructor() {
@@ -37,17 +57,18 @@ export class MainMenu implements Menu {
       this.printMenuHeader();
 
       const userInput = await new Promise<string>((resolve) =>
-        rl.question(i18n.t("user.input") + " ", resolve)
+        rl.question("User input: ", resolve)
       );
 
-      if (userInput.toLowerCase() === MainMenu.MENU_COMMAND) {
+      // Check for exit command (like Java version)
+      if (userInput.toLowerCase() === Main.EXIT_COMMAND.toLowerCase()) {
         rl.close();
         process.exit(0);
       }
 
       const commandNumber = parseInt(userInput, 10);
       if (isNaN(commandNumber)) {
-        console.log(i18n.t("err.msg"));
+        console.log("Only 1, 2, 3, 4, 5, 6 is allowed. Try one more time");
         continue mainLoop;
       }
 
@@ -56,9 +77,11 @@ export class MainMenu implements Menu {
           menuToNavigate = new SignUpMenu();
           break mainLoop;
         case 2:
-          menuToNavigate = this.context.getLoggedInUser()
-            ? new SignOutMenu()
-            : new SignInMenu();
+          if (this.context.getLoggedInUser() === null) {
+            menuToNavigate = new SignInMenu();
+          } else {
+            menuToNavigate = new SignOutMenu();
+          }
           break mainLoop;
         case 3:
           menuToNavigate = new ProductCatalogMenu();
@@ -72,14 +95,8 @@ export class MainMenu implements Menu {
         case 6:
           menuToNavigate = new CustomerListMenu();
           break mainLoop;
-        case 7:
-          menuToNavigate = new ResetPasswordMenu();
-          break mainLoop;
-        case 8:
-          menuToNavigate = new ChangeLanguageMenu();
-          break mainLoop;
         default:
-          console.log(i18n.t("err.msg"));
+          console.log("Only 1, 2, 3, 4, 5, 6 is allowed. Try one more time");
           continue mainLoop;
       }
     }
@@ -92,11 +109,11 @@ export class MainMenu implements Menu {
   }
 
   printMenuHeader(): void {
-    console.log(i18n.t("main.menu.header"));
-    if (!this.context.getLoggedInUser()) {
-      console.log(i18n.t("menu.for.not.logged.in.user"));
+    console.log("***** MAIN MENU *****");
+    if (this.context.getLoggedInUser() === null) {
+      console.log(MainMenu.MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
     } else {
-      console.log(i18n.t("menu.for.logged.in.user"));
+      console.log(MainMenu.MAIN_MENU_TEXT_FOR_LOGGED_IN_USER);
     }
   }
 }
