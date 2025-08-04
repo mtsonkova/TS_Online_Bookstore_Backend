@@ -1,4 +1,4 @@
-import { User } from "src/entities/entitiesInterfaces/User";
+import { User } from "./entities/entitiesInterfaces/User";
 
 export interface UserManagementService {
 

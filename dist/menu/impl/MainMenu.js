@@ -37,18 +37,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MainMenu = void 0;
-const ApplicationContext_1 = require("src/configs/ApplicationContext");
+const ApplicationContext_1 = require("./configs/ApplicationContext");
 const readline = __importStar(require("readline"));
 const i18next_1 = __importDefault(require("i18next"));
-const SignUpMenu_1 = require("src/menu/impl/SignUpMenu");
-const SignInMenu_1 = require("src/menu/impl/SignInMenu");
-const SignOutMenu_1 = require("src/menu/impl/SignOutMenu");
-const ProductCatalogMenu_1 = require("src/menu/impl/ProductCatalogMenu");
-const MyOrdersMenu_1 = require("src/menu/impl/MyOrdersMenu");
-const SettingsMenu_1 = require("src/menu/impl/SettingsMenu");
-const CustomerListMenu_1 = require("src/menu/impl/CustomerListMenu");
-const ResetPasswordMenu_1 = require("src/menu/impl/ResetPasswordMenu");
-const ChangeLanguageMenu_1 = require("src/menu/impl/ChangeLanguageMenu");
+const SignUpMenu_1 = require("./menu/impl/SignUpMenu");
+const SignInMenu_1 = require("./menu/impl/SignInMenu");
+const SignOutMenu_1 = require("./menu/impl/SignOutMenu");
+const ProductCatalogMenu_1 = require("./menu/impl/ProductCatalogMenu");
+const MyOrdersMenu_1 = require("./menu/impl/MyOrdersMenu");
+const SettingsMenu_1 = require("./menu/impl/SettingsMenu");
+const CustomerListMenu_1 = require("./menu/impl/CustomerListMenu");
+const ResetPasswordMenu_1 = require("./menu/impl/ResetPasswordMenu");
+const ChangeLanguageMenu_1 = require("./menu/impl/ChangeLanguageMenu");
 class MainMenu {
     constructor() {
         this.context = ApplicationContext_1.ApplicationContext.getInstance();

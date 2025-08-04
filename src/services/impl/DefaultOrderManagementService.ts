@@ -1,7 +1,7 @@
-import { Order } from "src/entities/entitiesInterfaces/Order";
-import { OrderManagementService } from "src/services/OrderManagementService";
-import { OrderStoringService } from "src/storage/OrderStoringService";
-import { DefaultOrderStoringService } from "src/storage/impl/DefaultOrderStoringService";
+import { Order } from "./entities/entitiesInterfaces/Order";
+import { OrderManagementService } from "./services/OrderManagementService";
+import { OrderStoringService } from "./storage/OrderStoringService";
+import { DefaultOrderStoringService } from "./storage/impl/DefaultOrderStoringService";
 
 export class DefaultOrderManagementService implements OrderManagementService {
   private static instance: DefaultOrderManagementService;

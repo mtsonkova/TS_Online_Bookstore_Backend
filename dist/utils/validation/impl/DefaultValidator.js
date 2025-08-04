@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultValidator = void 0;
-// src/utils/validation/DefaultValidator.ts
+// ./utils/validation/DefaultValidator.ts
 require("reflect-metadata");
 class DefaultValidator {
     isValid(obj) {

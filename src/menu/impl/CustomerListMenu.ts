@@ -1,10 +1,10 @@
-import { ApplicationContext } from "src/configs/ApplicationContext";
-import { User } from "src/entities/entitiesInterfaces/User";
-import { Menu } from "src/menu/Menu";
-import { UserManagementService } from "src/services/UserManagementService";
-import { DefaultUserManagementService } from "src/services/impl/DefaultUserManagementService";
+import { ApplicationContext } from "./configs/ApplicationContext";
+import { User } from "./entities/entitiesInterfaces/User";
+import { Menu } from "./menu/Menu";
+import { UserManagementService } from "./services/UserManagementService";
+import { DefaultUserManagementService } from "./services/impl/DefaultUserManagementService";
 import i18n from "i18next";
-import { MainMenu } from "src/menu/impl/MainMenu"; // Adjust if needed
+import { MainMenu } from "./menu/impl/MainMenu"; // Adjust if needed
 
 export class CustomerListMenu implements Menu {
   private context: ApplicationContext;

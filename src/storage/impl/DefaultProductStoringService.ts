@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
 
-import { Product } from "src/entities/entitiesInterfaces/Product";
-import { DefaultProduct } from "src/entities/impl/DefaultProduct";
-import { ProductStoringService } from "src/storage/ProductStoringService";
+import { Product } from "./entities/entitiesInterfaces/Product";
+import { DefaultProduct } from "./entities/impl/DefaultProduct";
+import { ProductStoringService } from "./storage/ProductStoringService";
 
 export class DefaultProductStoringService implements ProductStoringService {
   private static readonly PRODUCTS_INFO_STORAGE = "products.csv";
@@ -13,6 +13,8 @@ export class DefaultProductStoringService implements ProductStoringService {
   private static readonly PRODUCT_CATEGORY_INDEX = 2;
   private static readonly PRODUCT_NAME_INDEX = 1;
   private static readonly PRODUCT_ID_INDEX = 0;
+
+  
 
   public loadProducts(): Product[] {
     const filePath = path.join(

@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SignOutMenu = void 0;
-const ApplicationContext_1 = require("src/configs/ApplicationContext");
+const ApplicationContext_1 = require("./configs/ApplicationContext");
 const i18next_1 = __importDefault(require("i18next")); // Assuming you're using i18next
 class SignOutMenu {
     constructor() {

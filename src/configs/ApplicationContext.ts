@@ -1,13 +1,13 @@
 
-// import {Cart} from 'src/entities/entitiesInterfaces/Cart';
-// import {User} from 'src/entities/entitiesInterfaces/User';
-// import { DefaultCart } from 'src/entities/impl/DefaultCart';
-// import{Menu} from 'src/menu/Menu';
+// import {Cart} from './entities/entitiesInterfaces/Cart';
+// import {User} from './entities/entitiesInterfaces/User';
+// import { DefaultCart } from './entities/impl/DefaultCart';
+// import{Menu} from './menu/Menu';
 
-import {Cart} from 'src/entities/entitiesInterfaces/Cart';
-import {User} from 'src/entities/entitiesInterfaces/User';
-import { DefaultCart } from 'src/entities/impl/DefaultCart';
-import{Menu} from 'src/menu/Menu';
+import {Cart} from './entities/entitiesInterfaces/Cart';
+import {User} from './entities/entitiesInterfaces/User';
+import { DefaultCart } from './entities/impl/DefaultCart';
+import{Menu} from './menu/Menu';
 
 export class ApplicationContext {
 	

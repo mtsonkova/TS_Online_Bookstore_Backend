@@ -34,9 +34,9 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChangePasswordMenu = void 0;
-const ApplicationContext_1 = require("src/configs/ApplicationContext");
+const ApplicationContext_1 = require("./configs/ApplicationContext");
 const readline = __importStar(require("readline"));
-const MainMenu_1 = require("./MainMenu"); // adjust path if necessary
+const MainMenu_1 = require("./menu/impl/MainMenu"); // adjust path if necessary
 const RESOURCE_BUNDLE = {
     "change.password.header": {
         en: "Change Password",

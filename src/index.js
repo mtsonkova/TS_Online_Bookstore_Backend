@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var MainMenu_1 = require("src/menu/impl/MainMenu");
+var MainMenu_1 = require("./menu/impl/MainMenu");
 var Main = /** @class */ (function () {
     function Main() {
     }

@@ -1,12 +1,12 @@
-import { ApplicationContext } from "src/configs/ApplicationContext";
-import { Order } from "src/entities/entitiesInterfaces/Order";
-import { DefaultOrder } from "src/entities/impl/DefaultOrder";
-import { Menu } from "src/menu/Menu";
-import { OrderManagementService } from "src/services/OrderManagementService";
-import { DefaultOrderManagementService } from "src/services/impl/DefaultOrderManagementService";
+import { ApplicationContext } from "./configs/ApplicationContext";
+import { Order } from "./entities/entitiesInterfaces/Order";
+import { DefaultOrder } from "./entities/impl/DefaultOrder";
+import { Menu } from "./menu/Menu";
+import { OrderManagementService } from "./services/OrderManagementService";
+import { DefaultOrderManagementService } from "./services/impl/DefaultOrderManagementService";
 import * as readline from "readline-sync";
-import { MainMenu } from "src/menu/impl/MainMenu"; // assuming this exists
-import { messages } from "src/configs/messages"; // assuming a replacement for Java's ResourceBundle
+import { MainMenu } from "./menu/impl/MainMenu"; // assuming this exists
+import { messages } from "./configs/messages"; // assuming a replacement for Java's ResourceBundle
 
 export class CheckoutMenu implements Menu {
   private context: ApplicationContext;

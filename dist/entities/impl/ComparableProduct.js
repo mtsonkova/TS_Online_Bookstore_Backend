@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComparableProduct = void 0;
-// exect issues here because we do not have default Comparable interface in TS
-// public class ComparableProduct implements Product, Comparable<Product> {
 class ComparableProduct {
     constructor(id, productName, categoryName, price) {
         this.id = id ?? 0;

@@ -1,5 +1,5 @@
-import { Cart } from 'src/entities/entitiesInterfaces/Cart';
-import { Product } from 'src/entities/entitiesInterfaces/Product';
+import { Cart } from './entities/entitiesInterfaces/Cart';
+import { Product } from './entities/entitiesInterfaces/Product';
 
 export class DefaultCart implements Cart {
 

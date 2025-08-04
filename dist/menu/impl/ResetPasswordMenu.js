@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResetPasswordMenu = void 0;
-const DefaultResetPasswordService_1 = require("src/services/impl/DefaultResetPasswordService");
-const DefaultUserManagementService_1 = require("src/services/impl/DefaultUserManagementService");
+const DefaultResetPasswordService_1 = require("./services/impl/DefaultResetPasswordService");
+const DefaultUserManagementService_1 = require("./services/impl/DefaultUserManagementService");
 const i18next_1 = __importDefault(require("i18next"));
 const MainMenu_1 = require("./MainMenu"); // adjust import path as needed
 class ResetPasswordMenu {

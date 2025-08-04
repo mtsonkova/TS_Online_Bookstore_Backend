@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultProductManagementService = void 0;
-const DefaultProduct_1 = require("src/entities/impl/DefaultProduct");
-const DefaultProductStoringService_1 = require("src/storage/impl/DefaultProductStoringService");
+const DefaultProduct_1 = require("./entities/impl/DefaultProduct");
+const DefaultProductStoringService_1 = require("./storage/impl/DefaultProductStoringService");
 class DefaultProductManagementService {
     static initialize() {
         DefaultProductManagementService.loadProductsFromStorage();

@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChangeLanguageMenu = void 0;
-const MainMenu_1 = require("src/menu/impl/MainMenu"); // adjust path if needed
+const MainMenu_1 = require("./menu/impl/MainMenu"); // adjust path if needed
 const readline = __importStar(require("readline"));
 const RESOURCE_BUNDLE = {
     "change.language.header": {

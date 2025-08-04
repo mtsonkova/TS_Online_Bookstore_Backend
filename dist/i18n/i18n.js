@@ -1,11 +1,11 @@
 "use strict";
-// src/i18n/i18n.ts
+// ./i18n/i18n.ts
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const i18next_1 = __importDefault(require("i18next"));
-const messages_en_json_1 = __importDefault(require("src/i18n/messages_en.json")); // adjust path if needed
+const messages_en_json_1 = __importDefault(require("./i18n/messages_en.json")); // adjust path if needed
 i18next_1.default.init({
     lng: 'en', // default language
     fallbackLng: 'en', // fallback if key not found

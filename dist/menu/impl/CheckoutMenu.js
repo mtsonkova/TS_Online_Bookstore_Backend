@@ -34,12 +34,12 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CheckoutMenu = void 0;
-const ApplicationContext_1 = require("src/configs/ApplicationContext");
-const DefaultOrder_1 = require("src/entities/impl/DefaultOrder");
-const DefaultOrderManagementService_1 = require("src/services/impl/DefaultOrderManagementService");
+const ApplicationContext_1 = require("./configs/ApplicationContext");
+const DefaultOrder_1 = require("./entities/impl/DefaultOrder");
+const DefaultOrderManagementService_1 = require("./services/impl/DefaultOrderManagementService");
 const readline = __importStar(require("readline-sync"));
-const MainMenu_1 = require("src/menu/impl/MainMenu"); // assuming this exists
-const messages_1 = require("src/configs/messages"); // assuming a replacement for Java's ResourceBundle
+const MainMenu_1 = require("./menu/impl/MainMenu"); // assuming this exists
+const messages_1 = require("./configs/messages"); // assuming a replacement for Java's ResourceBundle
 class CheckoutMenu {
     constructor() {
         this.context = ApplicationContext_1.ApplicationContext.getInstance();

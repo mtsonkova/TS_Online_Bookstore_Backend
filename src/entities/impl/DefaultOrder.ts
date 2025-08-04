@@ -1,5 +1,5 @@
-import {Order} from 'src/entities/entitiesInterfaces/Order';
-import {Product} from 'src/entities/entitiesInterfaces/Product';
+import {Order} from './entities/entitiesInterfaces/Order';
+import {Product} from './entities/entitiesInterfaces/Product';
 
 export class DefaultOrder implements Order {
 

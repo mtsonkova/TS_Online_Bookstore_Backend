@@ -1,10 +1,10 @@
-import { ApplicationContext } from "src/configs/ApplicationContext";
-import { Menu } from "src/menu/Menu";
-import { ResetPasswordService } from "src/services/ResetPasswordService";
-import { UserManagementService } from "src/services/UserManagementService";
-import { DefaultResetPasswordService } from "src/services/impl/DefaultResetPasswordService";
-import { DefaultUserManagementService } from "src/services/impl/DefaultUserManagementService";
-import { User } from "src/entities/entitiesInterfaces/User";
+import { ApplicationContext } from "./configs/ApplicationContext";
+import { Menu } from "./menu/Menu";
+import { ResetPasswordService } from "./services/ResetPasswordService";
+import { UserManagementService } from "./services/UserManagementService";
+import { DefaultResetPasswordService } from "./services/impl/DefaultResetPasswordService";
+import { DefaultUserManagementService } from "./services/impl/DefaultUserManagementService";
+import { User } from "./entities/entitiesInterfaces/User";
 import i18n from "i18next";
 import { MainMenu } from "./MainMenu"; // adjust import path as needed
 

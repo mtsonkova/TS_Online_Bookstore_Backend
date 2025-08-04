@@ -1,7 +1,7 @@
-// src/i18n/i18n.ts
+// ./i18n/i18n.ts
 
 import i18next from 'i18next';
-import en from 'src/i18n/messages_en.json'; // adjust path if needed
+import en from './i18n/messages_en.json'; // adjust path if needed
 
 i18next.init({
   lng: 'en', // default language

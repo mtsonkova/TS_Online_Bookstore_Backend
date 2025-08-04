@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultOrderManagementService = void 0;
-const DefaultOrderStoringService_1 = require("src/storage/impl/DefaultOrderStoringService");
+const DefaultOrderStoringService_1 = require("./storage/impl/DefaultOrderStoringService");
 class DefaultOrderManagementService {
     constructor() {
         this.orders = [];

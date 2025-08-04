@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SettingsMenu = void 0;
-const ApplicationContext_1 = require("src/configs/ApplicationContext");
+const ApplicationContext_1 = require("./configs/ApplicationContext");
 const i18next_1 = __importDefault(require("i18next"));
-const MainMenu_1 = require("src/menu/impl/MainMenu"); // Adjust path as needed
-const ChangePasswordMenu_1 = require("src/menu/impl/ChangePasswordMenu"); // Adjust path as needed
-const ChangeEmailMenu_1 = require("src/menu/impl/ChangeEmailMenu"); // Adjust path as needed
+const MainMenu_1 = require("./menu/impl/MainMenu"); // Adjust path as needed
+const ChangePasswordMenu_1 = require("./menu/impl/ChangePasswordMenu"); // Adjust path as needed
+const ChangeEmailMenu_1 = require("./menu/impl/ChangeEmailMenu"); // Adjust path as needed
 class SettingsMenu {
     constructor() {
         this.context = ApplicationContext_1.ApplicationContext.getInstance();

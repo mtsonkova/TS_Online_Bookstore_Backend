@@ -1,5 +1,5 @@
-// src/utils/comparators/CustomProductComparator.ts
-import { Product } from "src/entities/entitiesInterfaces/Product";
+// ./utils/comparators/CustomProductComparator.ts
+import { Product } from "./entities/entitiesInterfaces/Product";
 
 export class CustomProductComparator {
   compare(product1: Product, product2: Product): number {

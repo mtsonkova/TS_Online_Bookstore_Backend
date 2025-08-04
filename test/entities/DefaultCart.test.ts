@@ -1,4 +1,4 @@
-import { DefaultCart } from "src/entities/impl/DefaultCart";
+import { DefaultCart } from "./entities/impl/DefaultCart";
 
 describe('DefaultCart functionality', () => {
     // todo

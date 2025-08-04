@@ -1,5 +1,5 @@
-import { validate } from 'src/annotations/validate';
-import {User} from 'src/entities/entitiesInterfaces/User';
+import { validate } from './annotations/validate';
+import {User} from './entities/entitiesInterfaces/User';
 
 export class DefaultUser implements User {
 	

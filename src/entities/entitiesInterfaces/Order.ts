@@ -1,4 +1,4 @@
-import { Product } from "src/entities/entitiesInterfaces/Product";
+import { Product } from "./entities/entitiesInterfaces/Product";
 
 export interface Order {
 

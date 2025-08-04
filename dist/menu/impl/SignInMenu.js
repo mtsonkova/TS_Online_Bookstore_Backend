@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SignInMenu = void 0;
-const ApplicationContext_1 = require("src/configs/ApplicationContext");
-const DefaultUserManagementService_1 = require("src/services/impl/DefaultUserManagementService");
+const ApplicationContext_1 = require("./configs/ApplicationContext");
+const DefaultUserManagementService_1 = require("./services/impl/DefaultUserManagementService");
 const i18next_1 = __importDefault(require("i18next"));
 class SignInMenu {
     constructor() {

@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultUser = void 0;
-const validate_1 = require("src/annotations/validate");
+const validate_1 = require("./annotations/validate");
 class DefaultUser {
     constructor(id, firstName, lastName, password, email) {
         this.id = id ?? ++DefaultUser.userCounter;

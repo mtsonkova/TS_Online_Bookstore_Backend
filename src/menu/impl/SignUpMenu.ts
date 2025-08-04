@@ -1,11 +1,11 @@
-import { ApplicationContext } from "src/configs/ApplicationContext";
-import { User } from "src/entities/entitiesInterfaces/User";
-import { DefaultUser } from "src/entities/impl/DefaultUser";
-import { Menu } from "src/menu/Menu";
-import { UserManagementService } from "src/services/UserManagementService";
-import { DefaultUserManagementService } from "src/services/impl/DefaultUserManagementService";
+import { ApplicationContext } from "./configs/ApplicationContext";
+import { User } from "./entities/entitiesInterfaces/User";
+import { DefaultUser } from "./entities/impl/DefaultUser";
+import { Menu } from "./menu/Menu";
+import { UserManagementService } from "./services/UserManagementService";
+import { DefaultUserManagementService } from "./services/impl/DefaultUserManagementService";
 import * as readline from "readline";
-import i18next from "src/i18n/i18n";
+import i18next from "./i18n/i18n";
 
 export class SignUpMenu implements Menu {
   private userManagementService: UserManagementService;

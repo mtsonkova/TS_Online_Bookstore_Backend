@@ -1,4 +1,4 @@
-import { MailSender } from "src/utils/mail/MailSender";
+import { MailSender } from "./utils/mail/MailSender";
 
 export class DefaultMailSender implements MailSender {
 

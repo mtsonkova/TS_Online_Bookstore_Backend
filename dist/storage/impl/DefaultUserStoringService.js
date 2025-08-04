@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultUserStoringService = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-const DefaultUser_1 = require("src/entities/impl/DefaultUser");
+const DefaultUser_1 = require("./entities/impl/DefaultUser");
 class DefaultUserStoringService {
     constructor() { } // prevent external instantiation
     static getInstance() {

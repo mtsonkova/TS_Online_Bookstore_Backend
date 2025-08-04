@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const MainMenu_1 = require("src/menu/impl/MainMenu");
+const MainMenu_1 = require("./menu/impl/MainMenu");
 class Main {
     static main(args) {
         const mainMenu = new MainMenu_1.MainMenu();

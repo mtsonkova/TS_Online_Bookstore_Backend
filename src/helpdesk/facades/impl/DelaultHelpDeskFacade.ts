@@ -1,6 +1,6 @@
-import { SupportTicket } from "src/helpdesk/entities/SupportTicket";
-import { HelpDeskFacade } from "src/helpdesk/facades/HelpDeskFacade";
-import { CustomSupportTicketsComparator } from "src/helpdesk/utils/CustomerSupportTicketComparator";
+import { SupportTicket } from "./helpdesk/entities/SupportTicket";
+import { HelpDeskFacade } from "./helpdesk/facades/HelpDeskFacade";
+import { CustomSupportTicketsComparator } from "./helpdesk/utils/CustomerSupportTicketComparator";
 
 export class DefaultHelpDeskFacade implements HelpDeskFacade {
   private tickets: SupportTicket[];

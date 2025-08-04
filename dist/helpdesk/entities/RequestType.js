@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RequestTypePriority = exports.RequestType = void 0;
 // RequestType.ts
-const Priority_1 = require("src/helpdesk/entities/Priority");
+const Priority_1 = require("./helpdesk/entities/Priority");
 var RequestType;
 (function (RequestType) {
     RequestType["OTHER"] = "OTHER";
