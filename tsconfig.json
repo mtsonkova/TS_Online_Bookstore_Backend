@@ -6,10 +6,9 @@
     "moduleResolution": "node",
     "rootDir": "src",
     "outDir": "./dist",
-    "baseUrl": "./src",
+    "baseUrl": "./src",  // Changed from "." to "./src"
     "paths": {
-      "*": ["*"],
-      "src/*": ["*"]
+      "src/*": ["./*"]   // Map src/* to current directory under src
     },
     "strict": true,
     "esModuleInterop": true,

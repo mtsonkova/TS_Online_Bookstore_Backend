@@ -1,19 +1,13 @@
 "use strict";
-// import {Cart} from 'src/entities/entitiesInterfaces/Cart';
-// import {User} from 'src/entities/entitiesInterfaces/User';
-// import { DefaultCart } from 'src/entities/impl/DefaultCart';
-// import{Menu} from 'src/menu/Menu';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApplicationContext = void 0;
 const DefaultCart_1 = require("src/entities/impl/DefaultCart");
 class ApplicationContext {
-    constructor(loggedInUser = null, mainMenu = null, sessionCart = null) {
+    // Private constructor (like Java)
+    constructor() {
         this.loggedInUser = null;
         this.mainMenu = null;
         this.sessionCart = null;
-        this.loggedInUser = loggedInUser;
-        this.mainMenu = mainMenu;
-        this.sessionCart = sessionCart;
     }
     setLoggedInUser(user) {
         if (this.sessionCart != null) {
@@ -30,16 +24,12 @@ class ApplicationContext {
     getMainMenu() {
         return this.mainMenu;
     }
+    // This matches the Java behavior exactly
     static getInstance() {
-        if (!this.instance) {
-            throw new Error("ApplicationContext has not been initialized.");
+        if (ApplicationContext.instance == null) {
+            ApplicationContext.instance = new ApplicationContext();
         }
-        return this.instance;
-    }
-    static initialize(loggedInUser, mainMenu, sessionCart) {
-        if (!this.instance) {
-            this.instance = new ApplicationContext(loggedInUser, mainMenu, sessionCart);
-        }
+        return ApplicationContext.instance;
     }
     getSessionCart() {
         if (this.sessionCart == null) {
