@@ -1,7 +1,7 @@
-import { ApplicationContext } from "@src/configs/ApplicationContext";
-import { Menu } from "@src/menu/Menu";
+import { ApplicationContext } from "src/configs/ApplicationContext";
+import { Menu } from "src/menu/Menu";
 import * as readline from "readline";
-import { MainMenu } from "./MainMenu"; // adjust path if necessary
+import { MainMenu } from "src/menu/impl/MainMenu"; // adjust path if necessary
 
 const RESOURCE_BUNDLE = {
   "change.password.header": {

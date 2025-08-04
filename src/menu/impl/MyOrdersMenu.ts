@@ -1,9 +1,9 @@
-import { ApplicationContext } from "@src/configs/ApplicationContext";
-import { Order } from "@src/entities/entitiesInterfaces/Order";
-import { Menu } from "@src/menu/Menu";
-import { OrderManagementService } from "@src/services/OrderManagementService";
-import { DefaultOrderManagementService } from "@src/services/impl/DefaultOrderManagementService";
-import { MainMenu } from "@src/menu/impl/MainMenu";
+import { ApplicationContext } from "src/configs/ApplicationContext";
+import { Order } from "src/entities/entitiesInterfaces/Order";
+import { Menu } from "src/menu/Menu";
+import { OrderManagementService } from "src/services/OrderManagementService";
+import { DefaultOrderManagementService } from "src/services/impl/DefaultOrderManagementService";
+import { MainMenu } from "src/menu/impl/MainMenu";
 import i18n from "i18next";
 
 export class MyOrdersMenu implements Menu {

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultUserManagementService = void 0;
-const DefaultUser_1 = require("@src/entities/impl/DefaultUser");
-const DefaultUserStoringService_1 = require("@src/storage/impl/DefaultUserStoringService");
+const DefaultUser_1 = require("src/entities/impl/DefaultUser");
+const DefaultUserStoringService_1 = require("src/storage/impl/DefaultUserStoringService");
 class DefaultUserManagementService {
     constructor() { }
     static getInstance() {

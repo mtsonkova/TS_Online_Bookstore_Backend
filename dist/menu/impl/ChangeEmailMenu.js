@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChangeEmailMenu = void 0;
-const ApplicationContext_1 = require("@src/configs/ApplicationContext");
-const Menu_1 = require("@src/menu/Menu");
-const MainMenu_1 = require("@src/menu/impl/MainMenu");
+const ApplicationContext_1 = require("src/configs/ApplicationContext");
+const Menu_1 = require("src/menu/Menu");
+const MainMenu_1 = require("src/menu/impl/MainMenu");
 class ChangeEmailMenu {
     constructor() {
         this.context = ApplicationContext_1.ApplicationContext.getInstance();

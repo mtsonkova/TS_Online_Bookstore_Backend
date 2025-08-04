@@ -1,4 +1,4 @@
-import {User} from '@src/entities/entitiesInterfaces/User';
+import {User} from 'src/entities/entitiesInterfaces/User';
 import hash from 'object-hash';
 
 

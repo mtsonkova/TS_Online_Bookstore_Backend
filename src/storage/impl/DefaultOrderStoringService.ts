@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { Order } from "@src/entities/entitiesInterfaces/Order";
-import { OrderStoringService } from "@src/storage/OrderStoringService";
+import { Order } from "src/entities/entitiesInterfaces/Order";
+import { OrderStoringService } from "src/storage/OrderStoringService";
 
 export class DefaultOrderStoringService implements OrderStoringService {
   private static readonly ORDERS_DATA_FILE_NAME = "orders.data.json";

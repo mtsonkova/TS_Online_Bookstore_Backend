@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultHelpDeskFacade = void 0;
-const CustomerSupportTicketComparator_1 = require("@src/helpdesk/utils/CustomerSupportTicketComparator");
+const CustomerSupportTicketComparator_1 = require("src/helpdesk/utils/CustomerSupportTicketComparator");
 class DefaultHelpDeskFacade {
     constructor() {
         this.tickets = [];

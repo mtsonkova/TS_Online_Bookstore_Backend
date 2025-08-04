@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { User } from "@src/entities/entitiesInterfaces/User";
-import { DefaultUser } from "@src/entities/impl/DefaultUser";
-import { UserStoringService } from "@src/storage/UserStoringService";
+import { User } from "src/entities/entitiesInterfaces/User";
+import { DefaultUser } from "src/entities/impl/DefaultUser";
+import { UserStoringService } from "src/storage/UserStoringService";
 
 export class DefaultUserStoringService implements UserStoringService {
   private static readonly USER_INFO_STORAGE = "users.csv";

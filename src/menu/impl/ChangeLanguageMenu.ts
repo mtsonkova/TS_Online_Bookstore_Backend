@@ -1,5 +1,5 @@
-import { Menu } from "@src/menu/Menu";
-import { MainMenu } from "@src/menu/impl/MainMenu"; // adjust path if needed
+import { Menu } from "src/menu/Menu";
+import { MainMenu } from "src/menu/impl/MainMenu"; // adjust path if needed
 import * as readline from "readline";
 
 const RESOURCE_BUNDLE = {

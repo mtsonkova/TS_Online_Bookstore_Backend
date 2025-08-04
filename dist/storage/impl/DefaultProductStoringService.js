@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultProductStoringService = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-const DefaultProduct_1 = require("@src/entities/impl/DefaultProduct");
+const DefaultProduct_1 = require("src/entities/impl/DefaultProduct");
 class DefaultProductStoringService {
     loadProducts() {
         const filePath = path_1.default.join(DefaultProductStoringService.RESOURCES_FOLDER, DefaultProductStoringService.CURRENT_TASK_RESOURCE_FOLDER, DefaultProductStoringService.PRODUCTS_INFO_STORAGE);

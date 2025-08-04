@@ -37,11 +37,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SignUpMenu = void 0;
-const ApplicationContext_1 = require("@src/configs/ApplicationContext");
-const DefaultUser_1 = require("@src/entities/impl/DefaultUser");
-const DefaultUserManagementService_1 = require("@src/services/impl/DefaultUserManagementService");
+const ApplicationContext_1 = require("src/configs/ApplicationContext");
+const DefaultUser_1 = require("src/entities/impl/DefaultUser");
+const DefaultUserManagementService_1 = require("src/services/impl/DefaultUserManagementService");
 const readline = __importStar(require("readline"));
-const i18n_1 = __importDefault(require("@src/i18n/i18n"));
+const i18n_1 = __importDefault(require("src/i18n/i18n"));
 class SignUpMenu {
     constructor() {
         this.userManagementService = DefaultUserManagementService_1.DefaultUserManagementService.getInstance();

@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
 
-import { Product } from "@src/entities/entitiesInterfaces/Product";
-import { DefaultProduct } from "@src/entities/impl/DefaultProduct";
-import { ProductStoringService } from "@src/storage/ProductStoringService";
+import { Product } from "src/entities/entitiesInterfaces/Product";
+import { DefaultProduct } from "src/entities/impl/DefaultProduct";
+import { ProductStoringService } from "src/storage/ProductStoringService";
 
 export class DefaultProductStoringService implements ProductStoringService {
   private static readonly PRODUCTS_INFO_STORAGE = "products.csv";

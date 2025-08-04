@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApplicationContext = void 0;
-const DefaultCart_1 = require("@src/entities/impl/DefaultCart");
+const DefaultCart_1 = require("src/entities/impl/DefaultCart");
 class ApplicationContext {
     constructor(loggedInUser = null, mainMenu = null, sessionCart = null) {
         this.loggedInUser = null;

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultSupportTicket = void 0;
-const RequestType_1 = require("@src/helpdesk/entities/RequestType");
+const RequestType_1 = require("src/helpdesk/entities/RequestType");
 class DefaultSupportTicket {
     constructor(requestType) {
         this.requestType = requestType;

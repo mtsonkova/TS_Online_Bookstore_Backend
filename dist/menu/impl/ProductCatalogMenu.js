@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductCatalogMenu = void 0;
-const ApplicationContext_1 = require("@src/configs/ApplicationContext");
-const DefaultProductManagementService_1 = require("@src/services/impl/DefaultProductManagementService");
+const ApplicationContext_1 = require("src/configs/ApplicationContext");
+const DefaultProductManagementService_1 = require("src/services/impl/DefaultProductManagementService");
 const i18next_1 = __importDefault(require("i18next"));
-const MainMenu_1 = require("@src/menu/impl/MainMenu"); // adjust paths as needed
-const CheckoutMenu_1 = require("@src/menu/impl/CheckoutMenu");
+const MainMenu_1 = require("src/menu/impl/MainMenu"); // adjust paths as needed
+const CheckoutMenu_1 = require("src/menu/impl/CheckoutMenu");
 class ProductCatalogMenu {
     constructor() {
         this.context = ApplicationContext_1.ApplicationContext.getInstance();

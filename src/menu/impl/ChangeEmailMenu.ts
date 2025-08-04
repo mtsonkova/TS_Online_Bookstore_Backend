@@ -1,6 +1,6 @@
-import { ApplicationContext } from "@src/configs/ApplicationContext";
-import { Menu, ExamConstants } from "@src/menu/Menu";
-import {MainMenu} from "@src/menu/impl/MainMenu";
+import { ApplicationContext } from "src/configs/ApplicationContext";
+import { Menu, ExamConstants } from "src/menu/Menu";
+import {MainMenu} from "src/menu/impl/MainMenu";
 
 export interface ResourceBundle {
   getString(key: string): string;

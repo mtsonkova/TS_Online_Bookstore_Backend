@@ -1,4 +1,4 @@
-import {Order} from '@src/entities/entitiesInterfaces/Order';
+import {Order} from 'src/entities/entitiesInterfaces/Order';
 
 export interface OrderManagementService {
 

@@ -1,9 +1,9 @@
-import { ApplicationContext } from "@src/configs/ApplicationContext";
-import { Menu } from "@src/menu/Menu";
+import { ApplicationContext } from "src/configs/ApplicationContext";
+import { Menu } from "src/menu/Menu";
 import i18n from "i18next";
-import { MainMenu } from "@src/menu/impl/MainMenu"; // Adjust path as needed
-import { ChangePasswordMenu } from "@src/menu/impl/ChangePasswordMenu"; // Adjust path as needed
-import { ChangeEmailMenu } from "@src/menu/impl/ChangeEmailMenu"; // Adjust path as needed
+import { MainMenu } from "src/menu/impl/MainMenu"; // Adjust path as needed
+import { ChangePasswordMenu } from "src/menu/impl/ChangePasswordMenu"; // Adjust path as needed
+import { ChangeEmailMenu } from "src/menu/impl/ChangeEmailMenu"; // Adjust path as needed
 
 export class SettingsMenu implements Menu {
   private context: ApplicationContext;
