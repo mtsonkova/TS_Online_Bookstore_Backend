@@ -32,14 +32,11 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MainMenu = void 0;
 const ApplicationContext_1 = require("src/configs/ApplicationContext");
+const index_1 = require("src/index"); // Import Main to access EXIT_COMMAND
 const readline = __importStar(require("readline"));
-const i18next_1 = __importDefault(require("i18next"));
 const SignUpMenu_1 = require("src/menu/impl/SignUpMenu");
 const SignInMenu_1 = require("src/menu/impl/SignInMenu");
 const SignOutMenu_1 = require("src/menu/impl/SignOutMenu");
@@ -47,8 +44,6 @@ const ProductCatalogMenu_1 = require("src/menu/impl/ProductCatalogMenu");
 const MyOrdersMenu_1 = require("src/menu/impl/MyOrdersMenu");
 const SettingsMenu_1 = require("src/menu/impl/SettingsMenu");
 const CustomerListMenu_1 = require("src/menu/impl/CustomerListMenu");
-const ResetPasswordMenu_1 = require("src/menu/impl/ResetPasswordMenu");
-const ChangeLanguageMenu_1 = require("src/menu/impl/ChangeLanguageMenu");
 class MainMenu {
     constructor() {
         this.context = ApplicationContext_1.ApplicationContext.getInstance();
@@ -64,14 +59,15 @@ class MainMenu {
         });
         mainLoop: while (true) {
             this.printMenuHeader();
-            const userInput = await new Promise((resolve) => rl.question(i18next_1.default.t("user.input") + " ", resolve));
-            if (userInput.toLowerCase() === MainMenu.MENU_COMMAND) {
+            const userInput = await new Promise((resolve) => rl.question("User input: ", resolve));
+            // Check for exit command (like Java version)
+            if (userInput.toLowerCase() === index_1.Main.EXIT_COMMAND.toLowerCase()) {
                 rl.close();
                 process.exit(0);
             }
             const commandNumber = parseInt(userInput, 10);
             if (isNaN(commandNumber)) {
-                console.log(i18next_1.default.t("err.msg"));
+                console.log("Only 1, 2, 3, 4, 5, 6 is allowed. Try one more time");
                 continue mainLoop;
             }
             switch (commandNumber) {
@@ -79,9 +75,12 @@ class MainMenu {
                     menuToNavigate = new SignUpMenu_1.SignUpMenu();
                     break mainLoop;
                 case 2:
-                    menuToNavigate = this.context.getLoggedInUser()
-                        ? new SignOutMenu_1.SignOutMenu()
-                        : new SignInMenu_1.SignInMenu();
+                    if (this.context.getLoggedInUser() === null) {
+                        menuToNavigate = new SignInMenu_1.SignInMenu();
+                    }
+                    else {
+                        menuToNavigate = new SignOutMenu_1.SignOutMenu();
+                    }
                     break mainLoop;
                 case 3:
                     menuToNavigate = new ProductCatalogMenu_1.ProductCatalogMenu();
@@ -95,14 +94,8 @@ class MainMenu {
                 case 6:
                     menuToNavigate = new CustomerListMenu_1.CustomerListMenu();
                     break mainLoop;
-                case 7:
-                    menuToNavigate = new ResetPasswordMenu_1.ResetPasswordMenu();
-                    break mainLoop;
-                case 8:
-                    menuToNavigate = new ChangeLanguageMenu_1.ChangeLanguageMenu();
-                    break mainLoop;
                 default:
-                    console.log(i18next_1.default.t("err.msg"));
+                    console.log("Only 1, 2, 3, 4, 5, 6 is allowed. Try one more time");
                     continue mainLoop;
             }
         }
@@ -112,14 +105,28 @@ class MainMenu {
         }
     }
     printMenuHeader() {
-        console.log(i18next_1.default.t("main.menu.header"));
-        if (!this.context.getLoggedInUser()) {
-            console.log(i18next_1.default.t("menu.for.not.logged.in.user"));
+        console.log("***** MAIN MENU *****");
+        if (this.context.getLoggedInUser() === null) {
+            console.log(MainMenu.MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
         }
         else {
-            console.log(i18next_1.default.t("menu.for.logged.in.user"));
+            console.log(MainMenu.MAIN_MENU_TEXT_FOR_LOGGED_IN_USER);
         }
     }
 }
 exports.MainMenu = MainMenu;
 MainMenu.MENU_COMMAND = "menu";
+MainMenu.MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER = "Please, enter number in console to proceed.\n" +
+    "1. Sign Up\n" +
+    "2. Sign In\n" +
+    "3. Product Catalog\n" +
+    "4. My Orders\n" +
+    "5. Settings\n" +
+    "6. Customer List";
+MainMenu.MAIN_MENU_TEXT_FOR_LOGGED_IN_USER = "Please, enter number in console to proceed.\n" +
+    "1. Sign Up\n" +
+    "2. Sign Out\n" +
+    "3. Product Catalog\n" +
+    "4. My Orders\n" +
+    "5. Settings\n" +
+    "6. Customer List";
