@@ -1,17 +1,17 @@
-import { ApplicationContext } from "./configs/ApplicationContext";
-import { Menu } from "./menu/Menu";
+import { ApplicationContext } from "src/configs/ApplicationContext";
+import { Menu } from "src/menu/Menu";
 import * as readline from "readline";
 import i18n from "i18next";
 
-import { SignUpMenu } from "./menu/impl/SignUpMenu";
-import { SignInMenu } from "./menu/impl/SignInMenu";
-import { SignOutMenu } from "./menu/impl/SignOutMenu";
-import { ProductCatalogMenu } from "./menu/impl/ProductCatalogMenu";
-import { MyOrdersMenu } from "./menu/impl/MyOrdersMenu";
-import { SettingsMenu } from "./menu/impl/SettingsMenu";
-import { CustomerListMenu } from "./menu/impl/CustomerListMenu";
-import { ResetPasswordMenu } from "./menu/impl/ResetPasswordMenu";
-import { ChangeLanguageMenu } from "./menu/impl/ChangeLanguageMenu";
+import { SignUpMenu } from "src/menu/impl/SignUpMenu";
+import { SignInMenu } from "src/menu/impl/SignInMenu";
+import { SignOutMenu } from "src/menu/impl/SignOutMenu";
+import { ProductCatalogMenu } from "src/menu/impl/ProductCatalogMenu";
+import { MyOrdersMenu } from "src/menu/impl/MyOrdersMenu";
+import { SettingsMenu } from "src/menu/impl/SettingsMenu";
+import { CustomerListMenu } from "src/menu/impl/CustomerListMenu";
+import { ResetPasswordMenu } from "src/menu/impl/ResetPasswordMenu";
+import { ChangeLanguageMenu } from "src/menu/impl/ChangeLanguageMenu";
 
 export class MainMenu implements Menu {
   public static readonly MENU_COMMAND = "menu";

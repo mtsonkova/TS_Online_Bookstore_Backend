@@ -1,7 +1,7 @@
-import { User } from './entities/entitiesInterfaces/User';
-import { DefaultUser } from './entities/impl/DefaultUser';
-import { UserManagementService } from './services/UserManagementService';
-import { DefaultUserStoringService } from './storage/impl/DefaultUserStoringService';
+import { User } from 'src/entities/entitiesInterfaces/User';
+import { DefaultUser } from 'src/entities/impl/DefaultUser';
+import { UserManagementService } from 'src/services/UserManagementService';
+import { DefaultUserStoringService } from 'src/storage/impl/DefaultUserStoringService';
 
 export class DefaultUserManagementService implements UserManagementService {
   private static readonly NOT_UNIQUE_EMAIL_ERROR_MESSAGE =

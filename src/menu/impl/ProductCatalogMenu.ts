@@ -1,12 +1,12 @@
-import { ApplicationContext } from "./configs/ApplicationContext";
-import { Cart } from "./entities/entitiesInterfaces/Cart";
-import { Product } from "./entities/entitiesInterfaces/Product";
-import { Menu } from "./menu/Menu";
-import { ProductManagementService } from "./services/ProductManagementService";
-import { DefaultProductManagementService } from "./services/impl/DefaultProductManagementService";
+import { ApplicationContext } from "src/configs/ApplicationContext";
+import { Cart } from "src/entities/entitiesInterfaces/Cart";
+import { Product } from "src/entities/entitiesInterfaces/Product";
+import { Menu } from "src/menu/Menu";
+import { ProductManagementService } from "src/services/ProductManagementService";
+import { DefaultProductManagementService } from "src/services/impl/DefaultProductManagementService";
 import i18n from "i18next";
-import { MainMenu } from "./menu/impl/MainMenu"; // adjust paths as needed
-import { CheckoutMenu } from "./menu/impl/CheckoutMenu";
+import { MainMenu } from "src/menu/impl/MainMenu"; // adjust paths as needed
+import { CheckoutMenu } from "src/menu/impl/CheckoutMenu";
 
 export class ProductCatalogMenu implements Menu {
   private static readonly CHECKOUT_COMMAND = "checkout";

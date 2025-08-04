@@ -1,6 +1,6 @@
-// ./utils/validation/DefaultValidator.ts
+// src/utils/validation/DefaultValidator.ts
 import "reflect-metadata";
-import { Validator } from './utils/validation/Validator'
+import { Validator } from 'src/utils/validation/Validator'
 
 export class DefaultValidator implements Validator {
   isValid(obj: object): boolean {

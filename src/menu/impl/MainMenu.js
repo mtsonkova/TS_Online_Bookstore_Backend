@@ -37,18 +37,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MainMenu = void 0;
-var ApplicationContext_1 = require("./configs/ApplicationContext");
+var ApplicationContext_1 = require("src/configs/ApplicationContext");
 var readline = require("readline");
 var i18next_1 = require("i18next");
-var SignUpMenu_1 = require("./menu/impl/SignUpMenu");
-var SignInMenu_1 = require("./menu/impl/SignInMenu");
-var SignOutMenu_1 = require("./menu/impl/SignOutMenu");
-var ProductCatalogMenu_1 = require("./menu/impl/ProductCatalogMenu");
-var MyOrdersMenu_1 = require("./menu/impl/MyOrdersMenu");
-var SettingsMenu_1 = require("./menu/impl/SettingsMenu");
-var CustomerListMenu_1 = require("./menu/impl/CustomerListMenu");
-var ResetPasswordMenu_1 = require("./menu/impl/ResetPasswordMenu");
-var ChangeLanguageMenu_1 = require("./menu/impl/ChangeLanguageMenu");
+var SignUpMenu_1 = require("src/menu/impl/SignUpMenu");
+var SignInMenu_1 = require("src/menu/impl/SignInMenu");
+var SignOutMenu_1 = require("src/menu/impl/SignOutMenu");
+var ProductCatalogMenu_1 = require("src/menu/impl/ProductCatalogMenu");
+var MyOrdersMenu_1 = require("src/menu/impl/MyOrdersMenu");
+var SettingsMenu_1 = require("src/menu/impl/SettingsMenu");
+var CustomerListMenu_1 = require("src/menu/impl/CustomerListMenu");
+var ResetPasswordMenu_1 = require("src/menu/impl/ResetPasswordMenu");
+var ChangeLanguageMenu_1 = require("src/menu/impl/ChangeLanguageMenu");
 var MainMenu = /** @class */ (function () {
     function MainMenu() {
         this.context = ApplicationContext_1.ApplicationContext.getInstance();

@@ -1,4 +1,4 @@
-import {ComparableProduct} from './entities/impl/ComparableProduct';
+import {ComparableProduct} from 'src/entities/impl/ComparableProduct';
 
 let comparableProduct = new ComparableProduct(1, 'Lenovo Laptop', 'computers', 3620.59);
 let secondComparableProduct = new ComparableProduct();

@@ -1,4 +1,4 @@
-import { Product } from "./entities/entitiesInterfaces/Product";
+import { Product } from "src/entities/entitiesInterfaces/Product";
 
 export class ComparableProduct implements Product {
 	

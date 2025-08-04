@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const ComparableProduct_1 = require("./entities/impl/ComparableProduct");
+const ComparableProduct_1 = require("src/entities/impl/ComparableProduct");
 let comparableProduct = new ComparableProduct_1.ComparableProduct(1, 'Lenovo Laptop', 'computers', 3620.59);
 let secondComparableProduct = new ComparableProduct_1.ComparableProduct();
 describe('Test Comparable Product methods', () => {

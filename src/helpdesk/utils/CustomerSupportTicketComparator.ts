@@ -1,4 +1,4 @@
-import { SupportTicket } from "./helpdesk/entities/SupportTicket";
+import { SupportTicket } from "src/helpdesk/entities/SupportTicket";
 
 export class CustomSupportTicketsComparator {
 

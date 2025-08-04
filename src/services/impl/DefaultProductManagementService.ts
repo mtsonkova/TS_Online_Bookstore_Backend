@@ -1,8 +1,8 @@
-import { Product } from "./entities/entitiesInterfaces/Product";
-import { DefaultProduct } from "./entities/impl/DefaultProduct";
-import { ProductManagementService } from "./services/ProductManagementService";
-import { ProductStoringService } from "./storage/ProductStoringService";
-import { DefaultProductStoringService } from "./storage/impl/DefaultProductStoringService";
+import { Product } from "src/entities/entitiesInterfaces/Product";
+import { DefaultProduct } from "src/entities/impl/DefaultProduct";
+import { ProductManagementService } from "src/services/ProductManagementService";
+import { ProductStoringService } from "src/storage/ProductStoringService";
+import { DefaultProductStoringService } from "src/storage/impl/DefaultProductStoringService";
 
 export class DefaultProductManagementService implements ProductManagementService {
   private static instance: DefaultProductManagementService;

@@ -1,7 +1,7 @@
-import { User } from './entities/entitiesInterfaces/User';
-import { ResetPasswordService } from './services/ResetPasswordService';
-import { MailSender } from './utils/mail/MailSender';
-import { DefaultMailSender } from './services/impl/DefaultMailSender'; // Make sure to import this
+import { User } from 'src/entities/entitiesInterfaces/User';
+import { ResetPasswordService } from 'src/services/ResetPasswordService';
+import { MailSender } from 'src/utils/mail/MailSender';
+import { DefaultMailSender } from 'src/services/impl/DefaultMailSender'; // Make sure to import this
 
 export class DefaultResetPasswordService implements ResetPasswordService {
   private mailSender: MailSender;

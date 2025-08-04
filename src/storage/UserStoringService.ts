@@ -1,4 +1,4 @@
-import {User} from './entities/entitiesInterfaces/User';
+import {User} from 'src/entities/entitiesInterfaces/User';
 
 export interface UserStoringService {
 	

@@ -1,7 +1,7 @@
-import { Priority } from './helpdesk/entities/Priority';
-import { RequestType } from './helpdesk/entities/RequestType';
-import { RequestTypePriority } from './helpdesk/entities/RequestType';
-import { SupportTicket } from './helpdesk/entities/SupportTicket';
+import { Priority } from 'src/helpdesk/entities/Priority';
+import { RequestType } from 'src/helpdesk/entities/RequestType';
+import { RequestTypePriority } from 'src/helpdesk/entities/RequestType';
+import { SupportTicket } from 'src/helpdesk/entities/SupportTicket';
 
 export class DefaultSupportTicket implements SupportTicket {
   private static counter = 0;

@@ -1,5 +1,5 @@
 // RequestType.ts
-import { Priority } from './helpdesk/entities/Priority';
+import { Priority } from 'src/helpdesk/entities/Priority';
 
 export enum RequestType {
   OTHER = 'OTHER',

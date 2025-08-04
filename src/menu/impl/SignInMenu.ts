@@ -1,8 +1,8 @@
-import { ApplicationContext } from "./configs/ApplicationContext";
-import { User } from "./entities/entitiesInterfaces/User";
-import { Menu } from "./menu/Menu";
-import { UserManagementService } from "./services/UserManagementService";
-import { DefaultUserManagementService } from "./services/impl/DefaultUserManagementService";
+import { ApplicationContext } from "src/configs/ApplicationContext";
+import { User } from "src/entities/entitiesInterfaces/User";
+import { Menu } from "src/menu/Menu";
+import { UserManagementService } from "src/services/UserManagementService";
+import { DefaultUserManagementService } from "src/services/impl/DefaultUserManagementService";
 import i18n from "i18next";
 
 export class SignInMenu implements Menu {

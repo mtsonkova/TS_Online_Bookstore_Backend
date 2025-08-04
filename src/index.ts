@@ -1,5 +1,5 @@
-import { Menu } from "./menu/Menu";
-import { MainMenu } from "./menu/impl/MainMenu";
+import { Menu } from "src/menu/Menu";
+import { MainMenu } from "src/menu/impl/MainMenu";
 
 class Main {
 

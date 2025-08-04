@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "_moduleAliases": {
-    "src": "./dist"
+    "src": "src/dist"
   },
   "repository": {
     "type": "git",

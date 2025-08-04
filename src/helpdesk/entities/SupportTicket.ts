@@ -1,5 +1,5 @@
-import { Priority } from './helpdesk/entities/Priority';
-import { RequestType } from './helpdesk/entities/RequestType';
+import { Priority } from 'src/helpdesk/entities/Priority';
+import { RequestType } from 'src/helpdesk/entities/RequestType';
 
 export interface SupportTicket {
 

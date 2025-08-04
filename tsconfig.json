@@ -6,14 +6,15 @@
     "moduleResolution": "node",
     "rootDir": "src",
     "outDir": "./dist",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "./*": ["./*"]
+      "*": ["*"],
+      "src/*": ["*"]
     },
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "experimentalDecorators": true
   },
-  "include": ["src", "tsconfig.test.json"]
+  "include": ["src/**/*"]
 }
