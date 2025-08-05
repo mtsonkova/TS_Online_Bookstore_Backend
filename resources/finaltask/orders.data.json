@@ -11,5 +11,18 @@
       }
     ],
     "customerId": 8
+  },
+  {
+    "AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER": 16,
+    "creditCardNumber": "1234123412341234",
+    "products": [
+      {
+        "id": 4,
+        "productName": "4 Panel Oak Deco Interior Door",
+        "categoryName": "Doors",
+        "price": 209.09
+      }
+    ],
+    "customerId": 8
   }
 ]
