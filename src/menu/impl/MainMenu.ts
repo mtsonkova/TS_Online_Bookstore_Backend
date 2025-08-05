@@ -104,7 +104,7 @@ export class MainMenu implements Menu {
     rl.close();
 
     if (menuToNavigate) {
-      await menuToNavigate.start();
+      menuToNavigate.start();
     }
   }
 
