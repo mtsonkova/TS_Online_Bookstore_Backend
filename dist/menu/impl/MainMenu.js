@@ -101,7 +101,7 @@ class MainMenu {
         }
         rl.close();
         if (menuToNavigate) {
-            await menuToNavigate.start();
+            menuToNavigate.start();
         }
     }
     printMenuHeader() {

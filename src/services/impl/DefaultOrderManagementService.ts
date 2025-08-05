@@ -28,14 +28,22 @@ export class DefaultOrderManagementService implements OrderManagementService {
   }
 
   public getOrdersByUserId(userId: number): Order[] {
-  return (this.orderStoringService.loadOrders() ?? []).filter(
-    (order) => order.getCustomerId() === userId
-  );
-}
+    return (this.orderStoringService.loadOrders() ?? [])
+      .filter((order) => order && this.getOrderCustomerId(order) === userId);
+  }
+
+  private getOrderCustomerId(order: Order): number {
+    // Handle both class instances with methods and plain objects from JSON
+    if (typeof order.getCustomerId === 'function') {
+      return order.getCustomerId();
+    }
+    // Fallback to property access for plain objects
+    return (order as any).customerId;
+  }
 
   public getOrders(): Order[] {
     if (!this.orders || this.orders.length === 0) {
-      this.orders = this.orderStoringService.loadOrders()?? [];
+      this.orders = this.orderStoringService.loadOrders() ?? [];
     }
     return this.orders;
   }

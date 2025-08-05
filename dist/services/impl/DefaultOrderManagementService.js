@@ -21,7 +21,16 @@ class DefaultOrderManagementService {
         this.orderStoringService.saveOrders(this.orders);
     }
     getOrdersByUserId(userId) {
-        return (this.orderStoringService.loadOrders() ?? []).filter((order) => order.getCustomerId() === userId);
+        return (this.orderStoringService.loadOrders() ?? [])
+            .filter((order) => order && this.getOrderCustomerId(order) === userId);
+    }
+    getOrderCustomerId(order) {
+        // Handle both class instances with methods and plain objects from JSON
+        if (typeof order.getCustomerId === 'function') {
+            return order.getCustomerId();
+        }
+        // Fallback to property access for plain objects
+        return order.customerId;
     }
     getOrders() {
         if (!this.orders || this.orders.length === 0) {

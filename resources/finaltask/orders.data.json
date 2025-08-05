@@ -1,0 +1,15 @@
+[
+  {
+    "AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER": 16,
+    "creditCardNumber": "1234123412341234",
+    "products": [
+      {
+        "id": 7,
+        "productName": "Worcester 2000 25kW Ng Combi Boiler with Free Comfort+ II controller",
+        "categoryName": "Boilers",
+        "price": 859.99
+      }
+    ],
+    "customerId": 8
+  }
+]
