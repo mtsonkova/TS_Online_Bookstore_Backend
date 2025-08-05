@@ -1,17 +1,19 @@
 {
   "compilerOptions": {
+    "resolveJsonModule": true,
     "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "rootDir": "./src",
+    "rootDir": "src",
     "outDir": "./dist",
-    "baseUrl": "./src",
+    "baseUrl": "./src",  // Changed from "." to "./src"
     "paths": {
-      "@/*": ["*"]
+      "src/*": ["./*"]   // Map src/* to current directory under src
     },
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "experimentalDecorators": true
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }
