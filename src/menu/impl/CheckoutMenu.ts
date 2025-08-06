@@ -5,18 +5,16 @@ import { Menu } from "src/menu/Menu";
 import { OrderManagementService } from "src/services/OrderManagementService";
 import { DefaultOrderManagementService } from "src/services/impl/DefaultOrderManagementService";
 import * as readline from "readline-sync";
-import { MainMenu } from "src/menu/impl/MainMenu"; // assuming this exists
-import { messages } from "src/configs/messages"; // assuming a replacement for Java's ResourceBundle
+import { MainMenu } from "src/menu/impl/MainMenu"; 
+import messages from 'src/i18n/messages_en.json';
 
 export class CheckoutMenu implements Menu {
   private context: ApplicationContext;
   private orderManagementService: OrderManagementService;
-  private rb: Record<string, string>;
 
   constructor() {
     this.context = ApplicationContext.getInstance();
     this.orderManagementService = DefaultOrderManagementService.getInstance();
-    this.rb = messages; // Replace with your actual i18n implementation
   }
 
   public start(): void {
@@ -32,7 +30,7 @@ export class CheckoutMenu implements Menu {
       break;
     }
 
-    console.log(this.rb["thank.you.msg"]);
+    console.log(messages["thank.you.msg"]);
     new MainMenu().start();
   }
 
@@ -59,7 +57,7 @@ order.setCustomerId(loggedInUser.getId());
   }
 
   public printMenuHeader(): void {
-    console.log(this.rb["checkout.menu.header"]);
-    process.stdout.write(this.rb["enter.credit.card.number.cta"]);
+    console.log(messages["checkout.menu.header"]);
+    process.stdout.write(messages["enter.credit.card.number.cta"]);
   }
 }
