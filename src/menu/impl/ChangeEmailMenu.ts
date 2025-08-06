@@ -1,21 +1,13 @@
 import { ApplicationContext } from "src/configs/ApplicationContext";
 import { Menu, ExamConstants } from "src/menu/Menu";
 import {MainMenu} from "src/menu/impl/MainMenu";
-
-export interface ResourceBundle {
-  getString(key: string): string;
-}
-
-// Stub for resource bundle loader function; implement based on your i18n solution
-declare function getResourceBundle(baseName: string): ResourceBundle;
+import messages  from 'src/i18n/messages_en.json';
 
 export class ChangeEmailMenu implements Menu {
   private context: ApplicationContext;
-  private rb: ResourceBundle;
-
+ 
   constructor() {
     this.context = ApplicationContext.getInstance();
-    this.rb = getResourceBundle(ExamConstants.RESOURCE_BUNDLE_BASE_NAME);
   }
 
   public start(): void {
@@ -27,20 +19,16 @@ if (user) {
   user.setEmail(userInput);
 } else {
   console.error("No logged-in user found.");
-  // You could also handle this case as appropriate, e.g., show an error message or exit.
 }
-
-
-      console.log(this.rb.getString("mail.changed.msg"));
-
-      // Assuming MainMenu implements Menu interface
+    
+  console.log(messages["mail.changed.msg"]);
       new MainMenu().start();
     });
   }
 
   public printMenuHeader(): void {
-    console.log(this.rb.getString("change.language.header"));
-    process.stdout.write(this.rb.getString("enter.new.email.cta"));
+    console.log(messages["change.language.header"]);
+    process.stdout.write(messages["enter.new.email.cta"]);
   }
 
   private readUserInput(): Promise<string> {

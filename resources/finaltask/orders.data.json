@@ -24,5 +24,18 @@
       }
     ],
     "customerId": 8
+  },
+  {
+    "AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER": 16,
+    "creditCardNumber": "1234567890123456",
+    "products": [
+      {
+        "id": 10,
+        "productName": "Wienerberger Engineering Brick Red Smooth Class B 73mm - Pack of 368",
+        "categoryName": "Bricks",
+        "price": 523.99
+      }
+    ],
+    "customerId": 8
   }
 ]
